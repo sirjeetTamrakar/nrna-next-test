@@ -1,0 +1,19 @@
+.contact_list{
+  margin: 15px 0px;
+  padding: 0px;
+  list-style: none;
+  li{
+    margin: 15px  0;
+    svg{
+      width: 26px;
+      color: $primary-color;
+      margin-right: 5px;
+    }
+  }
+  &_item{
+    font-size: 14px;
+    color: $secondary-light-text;
+    // overflow-wrap: break-word;
+    // word-wrap: break-word;
+  }
+}

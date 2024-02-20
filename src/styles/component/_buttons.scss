@@ -1,0 +1,68 @@
+.btn-lg{
+  border: 1px solid #066fc4;
+  border-radius: 5px;
+  background: #066fc4;
+  color: white;
+  padding: 12px 25px;
+  font-size: 14px;
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 5px;
+  align-items: center;
+  width: fit-content;
+  &:hover{
+    text-decoration: none;
+    background-color: $tertiary-background;
+    color: white;
+    @include transition;
+  }
+}
+.btn-md{
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  padding: 6px 12px;
+  font-size: 14px;
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 5px;
+  align-items: center;
+  &:hover{
+    text-decoration: none;
+    @include transition;
+    color: white;
+    background-color: $tertiary-background;
+  }
+}
+.btn-md-contained{
+  border: 1px solid #046fc4;
+  border-radius: 5px;
+  color: white;
+  padding: 6px 12px;
+  font-size: 14px;
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 5px;
+  align-items: center;
+  background-color: #046fc4;
+  &:hover{
+    text-decoration: none;
+    @include transition;
+    color: white;
+    background-color: #02508e;
+  }
+}
+
+.btn-sm{
+  border: 1px solid $primary-color;
+  border-radius: 4px;
+  color: $primary-color;
+  padding: 6px 15px;
+  font-size: 13px;
+  &:hover{
+    text-decoration: none;
+    @include transition;
+    color: white;
+    background-color: $tertiary-background;
+  }
+}

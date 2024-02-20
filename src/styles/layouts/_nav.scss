@@ -1,0 +1,105 @@
+.Navbar {
+  &_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .logo_wrapper {
+      padding: 8px 0;
+      height: 64px;
+      img {
+        height: inherit;
+        width: inherit;
+        overflow: hidden;
+        object-fit: contain;
+      }
+    }
+    .main-name h4 {
+      font-size: 28px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 0;
+    }
+    .nav_wrapper {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      column-gap: 30px;
+      li {
+        a {
+          font-size: 15px;
+          color: #fff;
+          text-decoration: none;
+        }
+        .btn-md {
+          color: white;
+          background: none;
+          &:hover {
+            border-color: #0c1f62;
+          }
+        }
+        .home-btn {
+          transition: all 0.2s ease-in-out;
+
+          &:hover {
+            transform: scale(0.95);
+          }
+        }
+
+        svg {
+          color: #046fc4;
+          cursor: pointer;
+          font-size: 18px;
+        }
+        .btn-md-contained {
+          svg {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+.navbar_sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 100;
+  box-shadow: 2px 2px 15px #0000000d;
+  .nav_wrapper li {
+    .fa-bars {
+      color: $secondary-light-text;
+      cursor: pointer;
+      font-size: 24px;
+    }
+    a {
+      color: #000;
+      font-weight: 500;
+      font-size: 13px;
+    }
+    .btn-md {
+      color: $primary-color;
+      border-color: $primary-color;
+      &:hover {
+        border-color: #fff;
+      }
+    }
+    .home-btn {
+      padding: 6px 15px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 400;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      column-gap: 5px;
+      color: #046fc4;
+      border: 1px solid #046fc4;
+      border-left: 3px solid;
+    }
+  }
+}

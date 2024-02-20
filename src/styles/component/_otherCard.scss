@@ -1,0 +1,39 @@
+  .other_card{
+    box-shadow: 0px 3px 4px #eaeaea;
+    margin: 30px 0px;
+    display: block;
+    overflow: hidden;
+    border-radius: 5px;
+    
+    &:hover{
+      text-decoration: none;
+      @include transition;
+      box-shadow: 0px 3px 20px #dbdada;
+    }
+    .img_container{
+      height: 180px;
+      width: 100%;
+      overflow: hidden;
+      img{
+        height: inherit;
+        width: inherit;
+        object-fit: cover;
+        overflow: hidden;
+      }
+
+    }
+    &_content_wrap{
+      padding: 15px;
+      background-color: #fff;
+    }
+    &_title{
+      font-size: 18px;
+      font-weight: bold;
+      color: $secondary-text;
+    }
+    &_subtitle{
+      padding-top: 5px;
+      font-size: 14px;
+      color: $secondary-light-text;
+    }
+  }

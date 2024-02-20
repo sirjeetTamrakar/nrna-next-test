@@ -1,0 +1,10 @@
+.survey {
+  padding-top: 90px;
+}
+.survey_description {
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-clamp: 2;
+  height: 48px;
+}

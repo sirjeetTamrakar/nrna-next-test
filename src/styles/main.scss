@@ -1,0 +1,143 @@
+// fonts
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+//  abstracts
+@import "./abstract/variables";
+@import "./abstract/mixin";
+
+// components
+@import "./component/buttons";
+@import "./component/banner";
+@import "./component/candidate";
+@import "./component/eventCard";
+@import "./component/newsCard";
+@import "./component/otherCard";
+@import "./component/contactList";
+
+//  layouts
+@import "./layouts/nav";
+@import "./layouts/footer";
+
+// pages
+@import "./pageStyles/home";
+@import "./pageStyles/organization";
+@import "./pageStyles/allEvents";
+@import "./pageStyles/allNews";
+@import "./pageStyles/contact";
+@import "./pageStyles/candidate";
+@import "./pageStyles/singleEvent";
+@import "./pageStyles/singleNews";
+@import "./pageStyles/about";
+@import "./pageStyles/mission";
+@import "./pageStyles/vision";
+@import "./pageStyles/advise";
+@import "./pageStyles/survey";
+@import "./pageStyles/support";
+@import "./responsive";
+@import "./component/carousel";
+@import "./component/signIn";
+
+/* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 999; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #eaeaea; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.3s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+.sidenav.open {
+  width: 100%; /* Open the sidenav */
+}
+
+.closebtn {
+  position: absolute; /* Ensure it's properly positioned for closing */
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a.active {
+  color: #f1f1f1;
+  background-color: #333; /* Highlight background color */
+  /* You can add other styles as needed */
+}
+
+/* When you mouse over the navigation links, change their color */
+// .sidenav a:hover {
+//   color: #f1f1f1;
+// }
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.sideNavRegisterBox {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  padding: 0px 32px;
+  margin-top: 20px;
+  button {
+    font-size: 14px;
+    padding: 12px 14px;
+    align-self: flex-start;
+    max-width: 125px;
+  }
+}
+
+.sidebarLogin {
+  border: 1px solid #02508e;
+  color: #02508e;
+  font-size: 18px;
+  padding: 15px;
+}
+
+.sidebarRegister {
+  font-size: 18px;
+  padding: 15px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left 0.5s;
+}
+
+.home-slick {
+  .slick-prev {
+    left: 30px;
+    z-index: 1;
+  }
+  .slick-next {
+    right: 30px;
+    left: auto;
+  }
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 60px;
+    background-color: red;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}

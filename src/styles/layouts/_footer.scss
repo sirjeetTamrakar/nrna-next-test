@@ -1,0 +1,35 @@
+.footer {
+  background-color: #046fc4;
+  &_wrapper {
+    padding: 20px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $primary-text;
+    .copyright {
+      font-size: 12px;
+    }
+    .designed_by {
+      font-size: 12px;
+      margin-top: 5px;
+      a {
+        color: $primary-text;
+        // color: #fff;
+        &:hover {
+          color: $primary-light-text;
+        }
+      }
+    }
+    .app-download {
+      display: flex;
+      gap: 10px;
+    }
+
+    .terms {
+      margin-top: 10px;
+      display: flex;
+      // flex-direction: column;
+      gap: 10px;
+    }
+  }
+}
