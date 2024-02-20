@@ -55,15 +55,28 @@ const SingleNews = ({ single_news = {} }) => {
   return (
     <>
       <Head>
-        <meta name="og:description" content={single_news?.excerpt} />
-        <meta property="og:image" content={single_news?.feature_image} />
-        <meta property="og:title" content={single_news?.title} />
+        <meta
+          name="og:description"
+          content={single_news?.excerpt}
+          key={"ogdescription"}
+        />
+        <meta
+          property="og:image"
+          content={single_news?.feature_image}
+          key={"ogimage"}
+        />
+        <meta
+          property="og:title"
+          content={single_news?.title}
+          key={"ogtitle"}
+        />
 
         <meta
           property="og:url"
           content={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
+          key={"ogurl"}
         />
-        <meta property="og:type" content="article" />
+        <meta property="og:type" content="article" key={"ogtype"} />
         <title>{single_news?.title}</title>
         <meta name="description" content={single_news?.excerpt} />
 
