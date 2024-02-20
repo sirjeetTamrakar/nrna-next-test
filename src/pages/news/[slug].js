@@ -1,7 +1,7 @@
 import SecondaryNav from "@/components/locals/News/SecondaryNav";
 import { getAllNews, getNewsCategory } from "@/redux/homepage/actions";
 import { changeDateFormat } from "@/utils/dateUtils";
-import { WhatsApp } from "@mui/icons-material";
+import { Facebook, Twitter, WhatsApp } from "@mui/icons-material";
 import { Box, CircularProgress, Grid } from "@mui/material";
 import Head from "next/head";
 import Link from "next/link";
@@ -9,27 +9,20 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  FacebookIcon,
   FacebookShareButton,
-  TwitterIcon,
   TwitterShareButton,
   WhatsappShareButton,
 } from "react-share";
 
-const SingleNews = ({ single_news }) => {
+const SingleNews = ({ single_news = {} }) => {
+  console.log({ single_news });
   const dispatch = useDispatch();
   const location = useRouter();
-  const { slug } = location.query;
-
-  useEffect(() => {
-    dispatch(getAllNews());
-    dispatch(getNewsCategory());
-  }, [slug, dispatch]);
+  const { slug } = location?.query;
 
   const { news, news_category, single_news_loading } = useSelector(
     (state) => state.homepage
   );
-
   const recentNews = news?.data
     ?.filter((list) => list?.slug !== slug)
     .slice(0, 4);
@@ -40,18 +33,33 @@ const SingleNews = ({ single_news }) => {
       : news_category?.[0]?.id
   );
 
+  // useEffect(() => {
+  //   dispatch(getSingleNews(slug));
+  // }, [slug]);
+  useEffect(() => {
+    dispatch(getAllNews());
+    dispatch(getNewsCategory());
+  }, [slug]);
+
+  const handleSocialClick = () => {};
+
   return (
     <>
       <Head>
-        <meta property="og:description" content={single_news?.excerpt} />
+        <meta name="og:description" content={single_news?.excerpt} />
         <meta property="og:image" content={single_news?.feature_image} />
         <meta property="og:title" content={single_news?.title} />
+
         <meta
           property="og:url"
           content={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
         />
         <meta property="og:type" content="article" />
-        <meta name="twitter:card" content="summary_large_image" />
+        <title>{single_news?.title}</title>
+        <meta name="description" content={single_news?.excerpt} />
+
+        <meta property="author" content={single_news?.author} />
+        <meta name="twitter:card" content={"summary_large_image"} />
         <meta name="twitter:title" content={single_news?.title} />
         <meta name="twitter:description" content={single_news?.excerpt} />
         <meta name="twitter:image" content={single_news?.feature_image} />
@@ -69,69 +77,83 @@ const SingleNews = ({ single_news }) => {
 
       <div className="container">
         {single_news_loading ? (
-          <CircularProgress />
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            sx={{ height: "60vh" }}
+          >
+            <CircularProgress size={30} />
+          </Box>
         ) : (
           <div className="single_news_page">
             <Grid container className="news_main_grid">
               <Grid item md={8}>
                 <div className="single_news_page_content">
-                  <div className="single_news_page_imgwrap">
-                    <img
-                      src={single_news?.feature_image}
-                      alt={single_news?.title}
-                    />
-                  </div>
-                  <div className="single_news_page_title">
-                    {single_news?.title}
-                  </div>
-                  <div className="single_news_page_date">
-                    {changeDateFormat(
-                      single_news?.created_at,
-                      "DD-MMM-YYYY HH:MM"
-                    )}{" "}
-                    | Author: {single_news?.author ?? "NBNS Global"}
-                  </div>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      marginTop: "20px",
-                    }}
-                  >
-                    <Box sx={{ color: "gray", fontSize: "12px" }}>
-                      Share News
-                    </Box>
+                  <>
+                    <div className="single_news_page_imgwrap">
+                      <img
+                        src={single_news?.feature_image}
+                        alt={single_news?.title}
+                      />
+                    </div>
+                    <div className="single_news_page_title">
+                      {single_news?.title}
+                    </div>
+
+                    <div className="single_news_page_date">
+                      {changeDateFormat(
+                        single_news?.created_at,
+                        "DD-MMM-YYYY HH:MM"
+                      )}{" "}
+                      | Author: {single_news?.author ?? "NBNS Global"}
+                    </div>
                     <Box
-                      sx={{ display: "flex", gap: "15px", marginTop: "10px" }}
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        marginTop: "20px",
+                      }}
                     >
-                      <FacebookShareButton
-                        appId="393640856408187"
-                        url={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
+                      <Box sx={{ color: "gray", fontSize: "12px" }}>
+                        Share News
+                      </Box>
+                      <Box
+                        sx={{ display: "flex", gap: "15px", marginTop: "10px" }}
                       >
-                        <FacebookIcon
-                          sx={{ color: "#0866FF", fontSize: "30px" }}
-                        />
-                      </FacebookShareButton>
-                      <TwitterShareButton
-                        url={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
-                      >
-                        <TwitterIcon
-                          sx={{ color: "#1BC4F7", fontSize: "30px" }}
-                        />
-                      </TwitterShareButton>
-                      <WhatsappShareButton
-                        url={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
-                      >
-                        <WhatsApp sx={{ color: "#24CC63", fontSize: "30px" }} />
-                      </WhatsappShareButton>
+                        <FacebookShareButton
+                          appId="393640856408187"
+                          onClick={handleSocialClick}
+                          url={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
+                        >
+                          <Facebook
+                            sx={{ color: "#0866FF", fontSize: "30px" }}
+                          />
+                        </FacebookShareButton>
+                        <TwitterShareButton
+                          url={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
+                        >
+                          <Twitter
+                            sx={{ color: "#1BC4F7", fontSize: "30px" }}
+                          />
+                        </TwitterShareButton>
+                        <WhatsappShareButton
+                          url={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
+                        >
+                          <WhatsApp
+                            sx={{ color: "#24CC63", fontSize: "30px" }}
+                          />
+                        </WhatsappShareButton>
+                      </Box>
                     </Box>
-                  </Box>
-                  <div
-                    className="single_news_page_long"
-                    dangerouslySetInnerHTML={{
-                      __html: single_news?.description,
-                    }}
-                  />
+
+                    <div
+                      className="single_news_page_long"
+                      dangerouslySetInnerHTML={{
+                        __html: single_news?.description,
+                      }}
+                    ></div>
+                  </>
                 </div>
               </Grid>
               <Grid item md={4} sm={12} className="recent_news">
@@ -186,14 +208,21 @@ export async function getStaticProps({ params }) {
     .then((response) => response.json())
     .then((json) => json);
 
+  console.log({ res });
   return {
     props: {
       single_news: res?.data,
     },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 10 seconds
     revalidate: 10, // In seconds
   };
 }
 
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// the path has not been generated.
 export async function getStaticPaths() {
   const res = await fetch("https://api.nrnaglobal.com/api/news")
     .then((response) => response.json())
@@ -205,8 +234,9 @@ export async function getStaticPaths() {
     },
   }));
 
+  console.log({ paths });
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
