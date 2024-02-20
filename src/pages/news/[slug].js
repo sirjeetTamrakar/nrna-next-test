@@ -67,7 +67,7 @@ const SingleNews = ({ single_news = {} }) => {
         />
         <meta
           property="og:title"
-          content={single_news?.title}
+          content={"रविना थापाद्वारा एनआरएनए अध्यक्षमा उम्मेदवारी दर्ता"}
           key={"ogtitle"}
         />
 
@@ -77,7 +77,7 @@ const SingleNews = ({ single_news = {} }) => {
           key={"ogurl"}
         />
         <meta property="og:type" content="article" key={"ogtype"} />
-        <title>{single_news?.title}</title>
+        <title>{"रविना थापाद्वारा एनआरएनए अध्यक्षमा उम्मेदवारी दर्ता"}</title>
         <meta name="description" content={single_news?.excerpt} />
 
         <meta property="author" content={single_news?.author} />
