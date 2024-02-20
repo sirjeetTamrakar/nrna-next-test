@@ -1,12 +1,20 @@
 import SecondaryNav from "@/components/locals/News/SecondaryNav";
 import { getAllNews, getNewsCategory } from "@/redux/homepage/actions";
 import { changeDateFormat } from "@/utils/dateUtils";
-import { CircularProgress, Grid } from "@mui/material";
+import { WhatsApp } from "@mui/icons-material";
+import { Box, CircularProgress, Grid } from "@mui/material";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  WhatsappShareButton,
+} from "react-share";
 
 const SingleNews = ({ single_news }) => {
   const dispatch = useDispatch();
@@ -83,6 +91,41 @@ const SingleNews = ({ single_news }) => {
                     )}{" "}
                     | Author: {single_news?.author ?? "NBNS Global"}
                   </div>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      marginTop: "20px",
+                    }}
+                  >
+                    <Box sx={{ color: "gray", fontSize: "12px" }}>
+                      Share News
+                    </Box>
+                    <Box
+                      sx={{ display: "flex", gap: "15px", marginTop: "10px" }}
+                    >
+                      <FacebookShareButton
+                        appId="393640856408187"
+                        url={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
+                      >
+                        <FacebookIcon
+                          sx={{ color: "#0866FF", fontSize: "30px" }}
+                        />
+                      </FacebookShareButton>
+                      <TwitterShareButton
+                        url={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
+                      >
+                        <TwitterIcon
+                          sx={{ color: "#1BC4F7", fontSize: "30px" }}
+                        />
+                      </TwitterShareButton>
+                      <WhatsappShareButton
+                        url={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
+                      >
+                        <WhatsApp sx={{ color: "#24CC63", fontSize: "30px" }} />
+                      </WhatsappShareButton>
+                    </Box>
+                  </Box>
                   <div
                     className="single_news_page_long"
                     dangerouslySetInnerHTML={{
