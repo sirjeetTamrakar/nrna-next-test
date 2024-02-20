@@ -236,7 +236,7 @@ export async function getStaticPaths() {
 
   const paths = res?.data?.map((item) => ({
     params: {
-      slug: `/news/${item?.slug}`,
+      slug: item?.slug,
     },
   }));
 
