@@ -1,5 +1,5 @@
 import SecondaryNav from "@/components/locals/News/SecondaryNav";
-import { getNewsCategory } from "@/redux/homepage/actions";
+import { getAllNews, getNewsCategory } from "@/redux/homepage/actions";
 import { changeDateFormat } from "@/utils/dateUtils";
 import { WhatsApp } from "@mui/icons-material";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -46,13 +46,14 @@ const SingleNews = ({ single_news = {} }) => {
   //   dispatch(getSingleNews(slug));
   // }, [slug]);
   useEffect(() => {
+    dispatch(getAllNews());
     dispatch(getNewsCategory());
   }, [slug]);
 
   const handleSocialClick = () => {};
 
   return (
-    <div>
+    <>
       <Head>
         <title>{single_news?.title}</title>
         <meta name="description" content={single_news?.excerpt}></meta>
@@ -60,7 +61,7 @@ const SingleNews = ({ single_news = {} }) => {
         <meta property="og:title" content={single_news?.title}></meta>
         <meta
           property="og:url"
-          content={`https://nrna-front.vercel.app${location?.pathname}`}
+          content={`https://nrna-front.vercel.app/news/${single_news?.slug}`}
         ></meta>
         <meta property="og:image" content={single_news?.feature_image}></meta>
         <meta property="og:type" content="article"></meta>
@@ -71,9 +72,10 @@ const SingleNews = ({ single_news = {} }) => {
         <meta name="twitter:image" content={single_news?.feature_image}></meta>
         <meta
           name="twitter:url"
-          content={`https://nrna-front.vercel.app${location?.pathname}`}
+          content={`https://nrna-front.vercel.app/news/${single_news?.slug}`}
         ></meta>
       </Head>
+
       <SecondaryNav
         category={news_category}
         setSelected={setSelected}
@@ -129,21 +131,21 @@ const SingleNews = ({ single_news = {} }) => {
                         <FacebookShareButton
                           appId="393640856408187"
                           onClick={handleSocialClick}
-                          url={`https://nrna-front.vercel.app${location?.pathname}`}
+                          url={`https://nrna-front.vercel.app/news/${single_news?.slug}`}
                         >
                           <FacebookIcon
                             sx={{ color: "#0866FF", fontSize: "30px" }}
                           />
                         </FacebookShareButton>
                         <TwitterShareButton
-                          url={`https://nrna-front.vercel.app${location?.pathname}`}
+                          url={`https://nrna-front.vercel.app/news/${single_news?.slug}`}
                         >
                           <TwitterIcon
                             sx={{ color: "#1BC4F7", fontSize: "30px" }}
                           />
                         </TwitterShareButton>
                         <WhatsappShareButton
-                          url={`https://nrna-front.vercel.app${location?.pathname}`}
+                          url={`https://nrna-front.vercel.app/news/${single_news?.slug}`}
                         >
                           <WhatsApp
                             sx={{ color: "#24CC63", fontSize: "30px" }}
@@ -202,7 +204,7 @@ const SingleNews = ({ single_news = {} }) => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 
