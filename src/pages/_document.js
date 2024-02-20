@@ -1,9 +1,9 @@
-import { Head, Html, Main, NextScript } from "next/document";
+import { Html, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
     <Html lang="en">
-      <Head>
+      {/* <Head>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
@@ -26,7 +26,7 @@ export default function Document() {
           crossorigin="anonymous"
           referrerpolicy="no-referrer"
         />
-      </Head>
+      </Head> */}
       <body>
         <Main />
         <NextScript />
