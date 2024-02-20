@@ -217,7 +217,6 @@ export async function getStaticProps({ params }) {
     .then((response) => response.json())
     .then((json) => json);
 
-  console.log({ res });
   return {
     props: {
       single_news: res?.data,
@@ -243,7 +242,6 @@ export async function getStaticPaths() {
     },
   }));
 
-  console.log({ paths });
   return {
     paths,
     fallback: false,
