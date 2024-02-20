@@ -61,7 +61,7 @@ const SingleNews = ({ single_news = {} }) => {
         <meta property="og:title" content={single_news?.title} />
         <meta
           property="og:url"
-          content={`https://nrna-front.vercel.app/news/${single_news?.slug}`}
+          content={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
         />
         <meta property="og:image" content={single_news?.feature_image} />
         <meta property="og:type" content="article" />
@@ -72,7 +72,7 @@ const SingleNews = ({ single_news = {} }) => {
         <meta name="twitter:image" content={single_news?.feature_image} />
         <meta
           name="twitter:url"
-          content={`https://nrna-front.vercel.app/news/${single_news?.slug}`}
+          content={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
         />
       </Head>
 
@@ -131,21 +131,21 @@ const SingleNews = ({ single_news = {} }) => {
                         <FacebookShareButton
                           appId="393640856408187"
                           onClick={handleSocialClick}
-                          url={`https://nrna-front.vercel.app/news/${single_news?.slug}`}
+                          url={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
                         >
                           <FacebookIcon
                             sx={{ color: "#0866FF", fontSize: "30px" }}
                           />
                         </FacebookShareButton>
                         <TwitterShareButton
-                          url={`https://nrna-front.vercel.app/news/${single_news?.slug}`}
+                          url={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
                         >
                           <TwitterIcon
                             sx={{ color: "#1BC4F7", fontSize: "30px" }}
                           />
                         </TwitterShareButton>
                         <WhatsappShareButton
-                          url={`https://nrna-front.vercel.app/news/${single_news?.slug}`}
+                          url={`https://nrna-next-test.vercel.app/news/${single_news?.slug}`}
                         >
                           <WhatsApp
                             sx={{ color: "#24CC63", fontSize: "30px" }}
