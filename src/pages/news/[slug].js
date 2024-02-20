@@ -236,7 +236,6 @@ export async function getStaticPaths() {
   const res = await fetch("https://api.nrnaglobal.com/api/news")
     .then((response) => response.json())
     .then((json) => json);
-  console.log({ res });
 
   const paths = res?.data?.map((item) => ({
     params: {
