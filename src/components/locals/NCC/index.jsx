@@ -2,7 +2,6 @@ import { getAllRegions, getNcc } from "@/redux/homepage/actions";
 import { Box, Button, CircularProgress, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import NCCItem from "./NCCItem";
 import NccItemOne from "./NccSite/NccCardOne";
 import SecondaryNav from "./SecondaryNav";
@@ -13,13 +12,12 @@ const AllNCCSection = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  const { ncc: slug } = useParams();
   const { ncc, ncc_loading, settings, regions } = useSelector(
     (state) => state.homepage
   );
   const [filteredNcc, setFilteredNcc] = useState([]);
   const [nccLimit, setNccLimit] = useState(9);
-  const [selected, setSelected] = useState();
+  const [selected, setSelected] = useState("ALL");
   const [search, setSearch] = useState("");
 
   useEffect(() => {

@@ -8,7 +8,6 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 
 const NBNSLayout = ({ children }) => {
   const dispatch = useDispatch();
@@ -30,7 +29,6 @@ export default NBNSLayout;
 
 const SecondaryNavWrapper = () => {
   const dispatch = useDispatch();
-  const { slug } = useParams();
 
   const [selected, setSelected] = useState("home");
   const navigate = useRouter();
