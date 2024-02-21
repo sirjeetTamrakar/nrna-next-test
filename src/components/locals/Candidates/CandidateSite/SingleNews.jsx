@@ -5,9 +5,11 @@ import {
   getSingleUser,
 } from "@/redux/homepage/actions";
 import { changeDateFormat } from "@/utils/dateUtils";
+import { Box } from "@mui/material";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
 import SecondaryNav from "./SecondaryNav";
 
 const SingleNews = () => {
@@ -55,7 +57,7 @@ const SingleNews = () => {
 
   const dispatch = useDispatch();
 
-  const { slug, candidate } = useParams();
+  const { slug, candidate } = useRouter()?.query;
 
   const { news, news_category, single_news, single_user } = useSelector(
     (state) => state.homepage
@@ -71,12 +73,18 @@ const SingleNews = () => {
   );
 
   useEffect(() => {
-    dispatch(getSingleUser(candidate));
-
-    dispatch(getSingleNews(slug));
-    dispatch(getAllNews({ type: single_user?.role_name, id: single_user?.id }));
-    dispatch(getNewsCategory());
+    candidate && dispatch(getSingleUser(candidate));
+  }, [candidate]);
+  useEffect(() => {
+    single_user?.id &&
+      dispatch(getAllNews({ user_id: single_user?.id, limit: 100 }));
+  }, [single_user?.id]);
+  useEffect(() => {
+    slug && dispatch(getSingleNews(slug));
   }, [slug]);
+  useEffect(() => {
+    dispatch(getNewsCategory());
+  }, []);
 
   return (
     <>
@@ -88,7 +96,10 @@ const SingleNews = () => {
       />
       <div className="main_content">
         <div className="container">
-          <div className="single_event_page">
+          <Box
+            sx={{ display: "flex", justifyContent: "space-between" }}
+            className="single_event_page"
+          >
             <div className="single_event_page_content">
               <div className="single_event_page_title">
                 {single_news?.title}
@@ -166,13 +177,13 @@ const SingleNews = () => {
                   </div>
                 )}
                 <div className="button_wrap">
-                  <Link href={`/our-team/${candidate}/news`} className="btn-sm">
+                  <Link href={`/${candidate}/news`} className="btn-sm">
                     View All
                   </Link>
                 </div>
               </div>
             </div>
-          </div>
+          </Box>
         </div>
       </div>
     </>

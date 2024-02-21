@@ -1,3 +1,4 @@
+import CustomLoader from "@/components/common/CustomLoader/CustomLoader";
 import SecondaryNav from "@/components/globals/SecondaryNav";
 import {
   getAllHomeData,
@@ -42,7 +43,9 @@ const SecondaryNavWrapper = () => {
   const handleFunction = (data) => {
     navigate.push(data);
   };
-  const { single_ncc } = useSelector((state) => state.homepage);
+  const { single_ncc, single_ncc_loading } = useSelector(
+    (state) => state.homepage
+  );
 
   useEffect(() => {
     ncc && dispatch(getSingleNCC(ncc));
@@ -133,7 +136,7 @@ const SecondaryNavWrapper = () => {
       type: "ncc",
       id: single_ncc?.id,
     };
-    dispatch(getAllHomeData(data));
+    single_ncc?.id && dispatch(getAllHomeData(data));
   }, [single_ncc?.id]);
   const homeOptions = (home_data?.data?.slice(0, 4) || []).map((item) => ({
     title: item?.tabtitle,
@@ -143,6 +146,9 @@ const SecondaryNavWrapper = () => {
 
   // const allOptions = [...options, ...homeOptions, ...contact, ...download];
   const allOptions = [...options];
+  if (single_ncc_loading) {
+    return <CustomLoader />;
+  }
 
   return (
     <SecondaryNav

@@ -2,9 +2,9 @@ import MissionSection from "@/components/globals/MissionSection";
 import BannerBannerSection from "@/components/globals/SingleBanner";
 import VisionSection from "@/components/globals/VisionSection";
 import { getAllHomeData, getSiteSettings } from "@/redux/homepage/actions";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
 import NccNav from "./NccNav";
 
 const NccItemOneSingle = () => {
@@ -24,14 +24,16 @@ const NccItemOneSingle = () => {
       id: 1,
     };
     dispatch(getAllHomeData(finalData));
+  }, []);
+  useEffect(() => {
     dispatch(getSiteSettings());
   }, []);
 
-  const [selected, setSelected] = useState("home");
+  const navigate = useRouter();
+  const [selected, setSelected] = useState(navigate?.query?.slug || "home");
 
-  const navigate = useNavigate();
   const handleFunction = (data) => {
-    navigate(data);
+    navigate.push(data);
   };
   const homeOptions = (home_data?.data?.slice(0, 4) || []).map((item) => ({
     title: item?.tabtitle,

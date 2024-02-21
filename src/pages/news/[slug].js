@@ -15,7 +15,6 @@ import {
 } from "react-share";
 
 const SingleNews = ({ single_news = {} }) => {
-  console.log({ single_news });
   const dispatch = useDispatch();
   const location = useRouter();
   const { slug } = location?.query;
@@ -33,13 +32,10 @@ const SingleNews = ({ single_news = {} }) => {
       : news_category?.[0]?.id
   );
 
-  // useEffect(() => {
-  //   dispatch(getSingleNews(slug));
-  // }, [slug]);
   useEffect(() => {
     dispatch(getAllNews());
     dispatch(getNewsCategory());
-  }, [slug]);
+  }, []);
 
   const handleSocialClick = () => {};
 
@@ -208,7 +204,6 @@ export async function getStaticProps({ params }) {
     .then((response) => response.json())
     .then((json) => json);
 
-  console.log({ res });
   return {
     props: {
       single_news: res?.data,
@@ -234,7 +229,6 @@ export async function getStaticPaths() {
     },
   }));
 
-  console.log({ paths });
   return {
     paths,
     fallback: true,

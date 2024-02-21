@@ -4,6 +4,7 @@ import MissionSection from "@/components/globals/MissionSection";
 import TaglineSection from "@/components/globals/TaglineSection";
 import VisionSection from "@/components/globals/VisionSection";
 import { getBanner } from "@/redux/homepage/actions";
+import { Box, CircularProgress } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +17,7 @@ const NccSite = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-  const { settings, banners, ncc, home_data } = useSelector(
+  const { settings, banners, ncc, home_data, home_data_loading } = useSelector(
     (state) => state.homepage
   );
   console.log({ ncc, slug });
@@ -57,35 +58,31 @@ const NccSite = () => {
   return (
     <>
       <BannerSection banners={banners} />
-      {settings?.tagline_description && (
-        <TaglineSection
-          tagline={settings?.tagline_description}
-          taglineAuthor={settings?.tagline_author}
-        />
-      )}
-      {settings?.about && (
-        <AboutSection
-          about={settings?.about}
-          image={settings?.about_image}
-          linkUrl={`/ncc/${slug}/about`}
-        />
-      )}
+      {home_data_loading ? (
+        <Box
+          sx={{ display: "flex", justifyContent: "center", margin: "40px 0px" }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <>
+          {settings?.tagline_description && (
+            <TaglineSection
+              tagline={settings?.tagline_description}
+              taglineAuthor={settings?.tagline_author}
+            />
+          )}
+          {settings?.about && (
+            <AboutSection
+              about={settings?.about}
+              image={settings?.about_image}
+              linkUrl={`/ncc/${slug}/about`}
+            />
+          )}
 
-      {renderSections()}
-      {/* {settings?.mission && (
-        <MissionSection
-          mission={settings?.mission}
-          image={settings?.mission_image}
-          linkUrl={`/ncc/${slug}/mission`}
-        />
+          {renderSections()}
+        </>
       )}
-      {settings?.vision && (
-        <VisionSection
-          vision={settings?.vision}
-          image={settings?.vision_image}
-          linkUrl={`/ncc/${slug}/vision`}
-        />
-      )} */}
     </>
   );
 };

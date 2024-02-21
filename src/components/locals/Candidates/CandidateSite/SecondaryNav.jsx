@@ -1,20 +1,20 @@
-import { Box, Container } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useStyles } from './styles';
+import { Box, Container } from "@mui/material";
+import { useRouter } from "next/router";
+import { useStyles } from "./styles";
 
 const SecondaryNav = ({ category, selected, setSelected, setSearch, id }) => {
   const classes = useStyles();
-  const navigate = useNavigate();
+  const navigate = useRouter();
 
   const checkActive = (slug) => {
     if (selected) {
       if (slug === selected) {
-        return 'active';
-      } else return '';
+        return "active";
+      } else return "";
     } else if (slug === category?.[0]?.id) {
-      return 'active';
+      return "active";
     } else {
-      return '';
+      return "";
     }
   };
   const handleSearch = (e) => {
@@ -22,12 +22,12 @@ const SecondaryNav = ({ category, selected, setSelected, setSearch, id }) => {
   };
   const handleSetSelected = (slug) => {
     setSelected(slug);
-    navigate(`/${id}/news`, { state: slug });
+    navigate.push(`/${id}/news?state=${slug}`);
   };
   return (
     <Box className={classes.root}>
       <Container>
-        <Box sx={{ padding: '10px 0px' }} className={classes.header}>
+        <Box sx={{ padding: "10px 0px" }} className={classes.header}>
           {/* <Typography variant="h5" className={classes.title}>
             News
           </Typography> */}
@@ -38,8 +38,11 @@ const SecondaryNav = ({ category, selected, setSelected, setSearch, id }) => {
             <li
               className={checkActive(list?.id)}
               key={index}
-              onClick={() => handleSetSelected(list?.id)}>
-              <div style={{ width: 'max-content', padding: '0px 10px' }}>{list?.title}</div>
+              onClick={() => handleSetSelected(list?.id)}
+            >
+              <div style={{ width: "max-content", padding: "0px 10px" }}>
+                {list?.title}
+              </div>
             </li>
           ))}
         </ul>

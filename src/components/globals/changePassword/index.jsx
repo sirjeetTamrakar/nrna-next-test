@@ -5,14 +5,14 @@ import CustomPasswordInput from "@/components/common/Form/CustomPasswordInput";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { changePassword } from "@/redux/auth/actions";
 import { Box } from "@mui/material";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const ChangePassword = () => {
   const defaultValues = {};
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const { loading } = useSelector((state) => state.auth);
   const validationSchema = Yup.object({
     old_password: Yup.string().required("Please enter your old password"),
@@ -23,7 +23,7 @@ const ChangePassword = () => {
   });
 
   const handleSuccess = () => {
-    navigate("/");
+    navigate.push("/");
   };
 
   const onSubmit = (data) => {

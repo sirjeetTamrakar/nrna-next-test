@@ -20,18 +20,18 @@ const NewsCard = ({
         style={belowNews && { marginTop: "20px", marginBottom: "20px" }}
       >
         <div className={gridOne ? "img_wrapper_grid_one" : "img_wrapper"}>
-          <img src={image} alt="" />
+          <img src={news?.feature_image} alt="" />
         </div>
         <div
           style={{ display: "flex", flexDirection: "column", width: "100%" }}
         >
-          <div className="news_card_title">{title}</div>
-          {excerpt !== "" && (
-            <div className="news_card_text_desc">{excerpt}</div>
+          <div className="news_card_title">{news?.title}</div>
+          {news?.excerpt !== "" && (
+            <div className="news_card_text_desc">{news?.excerpt}</div>
           )}
           <div className="news_card_text_date">
             <TimeAgo time={news?.created_at} /> |&nbsp;
-            {author}{" "}
+            {news?.author}{" "}
           </div>{" "}
         </div>
       </Link>

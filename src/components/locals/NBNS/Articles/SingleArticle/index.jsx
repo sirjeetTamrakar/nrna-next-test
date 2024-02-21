@@ -1,13 +1,14 @@
 import { getArticles, getSingleArticle } from "@/redux/homepage/actions";
 import { changeDateFormat } from "@/utils/dateUtils";
 import { Box, CircularProgress, Grid } from "@mui/material";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
 
 const SingleArticle = () => {
   const dispatch = useDispatch();
-  const { slug } = useParams();
+  const { slug } = useRouter()?.query;
   const pathname = window.location.pathname;
 
   useEffect(() => {
@@ -22,9 +23,11 @@ const SingleArticle = () => {
     .slice(0, 4);
 
   useEffect(() => {
-    dispatch(getSingleArticle(slug));
-    dispatch(getArticles());
+    slug && dispatch(getSingleArticle(slug));
   }, [slug]);
+  useEffect(() => {
+    dispatch(getArticles());
+  }, []);
 
   return (
     <>
@@ -63,13 +66,20 @@ const SingleArticle = () => {
                       )}{" "}
                       | Created by: {single_article?.author}
                     </div>
-
-                    <div
-                      className="single_news_page_long"
-                      dangerouslySetInnerHTML={{
-                        __html: single_article?.description,
+                    <Box
+                      sx={{
+                        "& img": {
+                          width: "100% !important",
+                        },
                       }}
-                    ></div>
+                    >
+                      <div
+                        className="single_news_page_long"
+                        dangerouslySetInnerHTML={{
+                          __html: single_article?.description,
+                        }}
+                      ></div>
+                    </Box>
                   </>
                 </div>
               </Grid>

@@ -3,10 +3,10 @@ import EmailIcon from "@mui/icons-material/Email";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 
 const BusinessList = ({ data }) => {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const cardData = [
     {
       icon: company,
@@ -42,7 +42,7 @@ const BusinessList = ({ data }) => {
     <Box marginY={6}>
       {/* <div className="contact_page_title">Business</div> */}
 
-      <Container>
+      <Container sx={{ minHeight: "58.7vh" }}>
         <Grid container spacing={2}>
           {data?.business?.length !== 0 ? (
             data?.business?.map((item, index) => {
@@ -51,7 +51,7 @@ const BusinessList = ({ data }) => {
                   item
                   sm={3}
                   key={index}
-                  onClick={() => navigate(`/business/${item?.slug}`)}
+                  onClick={() => navigate.push(`/business/${item?.slug}`)}
                   sx={{ cursor: "pointer" }}
                 >
                   <div

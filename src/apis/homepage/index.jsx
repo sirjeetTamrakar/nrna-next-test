@@ -27,9 +27,10 @@ export const getAllNewsApi = (data) => {
     : "";
   const status = data?.status ? `&status=${data?.status}` : "";
   const query = data?.query ? `&search=${data?.query}` : "";
+  const user_id = data?.user_id ? `&user_id=${data?.user_id}` : "";
 
   return axiosInstance().get(
-    `/api/news${type}${limit}${id}${category_id}${status}${query}`
+    `/api/news${type}${limit}${id}${category_id}${status}${query}${user_id}`
   );
 };
 

@@ -1,9 +1,9 @@
 import PageBanner from "@/components/globals/PageBanner";
 import TaglineSection from "@/components/globals/TaglineSection";
 import { getAllHomeData, getSingleHomeData } from "@/redux/homepage/actions";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
 import BusinessNav from "./BusinessNav";
 const BusinessDataComponent = () => {
   const pathname = window.location.pathname;
@@ -13,7 +13,7 @@ const BusinessDataComponent = () => {
   }, [pathname]);
 
   const dispatch = useDispatch();
-  const { slug } = useParams();
+  const { slug, state } = useRouter()?.query;
 
   const { settings, banners, home_data, single_home_data } = useSelector(
     (state) => state.homepage
@@ -26,11 +26,11 @@ const BusinessDataComponent = () => {
     dispatch(getAllHomeData(finalData));
   }, []);
 
-  const [selected, setSelected] = useState("home");
+  const [selected, setSelected] = useState(slug || "home");
 
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const handleFunction = (data) => {
-    navigate(data);
+    navigate.push(data);
   };
   const homeOptions = (home_data?.data?.slice(0, 4) || []).map((item) => ({
     title: item?.tabtitle,
@@ -42,7 +42,7 @@ const BusinessDataComponent = () => {
   // ];
 
   useEffect(() => {
-    dispatch(getSingleHomeData(slug));
+    slug && dispatch(getSingleHomeData(slug));
   }, [slug]);
 
   const allOptions = [...homeOptions];

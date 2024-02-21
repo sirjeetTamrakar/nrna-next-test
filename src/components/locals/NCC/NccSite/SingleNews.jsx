@@ -6,17 +6,16 @@ import {
 } from "@/redux/homepage/actions";
 import { changeDateFormat } from "@/utils/dateUtils";
 import { Box, CircularProgress, Grid } from "@mui/material";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
 
 const SingleNews = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const { slug, ncc } = useRouter()?.query;
 
-  const { slug, ncc } = useParams();
-
-  const { news, single_news, single_news_loading } = useSelector(
+  const { news, single_news, single_news_loading, single_ncc } = useSelector(
     (state) => state.homepage
   );
   const recentNews = news?.data
@@ -24,12 +23,16 @@ const SingleNews = () => {
     .slice(0, 4);
 
   useEffect(() => {
-    dispatch(getSingleNews(slug));
-    dispatch(getAllNews({ type: "ncc", id: user?.id }));
-    dispatch(getNewsCategory());
+    slug && dispatch(getSingleNews(slug));
   }, [slug]);
   useEffect(() => {
-    dispatch(getSingleNCC(ncc));
+    single_ncc?.id && dispatch(getAllNews({ type: "ncc", id: single_ncc?.id }));
+  }, [single_ncc?.id]);
+  useEffect(() => {
+    dispatch(getNewsCategory());
+  }, []);
+  useEffect(() => {
+    ncc && dispatch(getSingleNCC(ncc));
   }, [ncc]);
   return (
     <>
@@ -115,7 +118,7 @@ const SingleNews = () => {
                       </div>
                     )}
                     <div className="button_wrap">
-                      <Link href={`/news`} className="btn-sm">
+                      <Link href={`/ncc/${ncc}/news`} className="btn-sm">
                         View All
                       </Link>
                     </div>

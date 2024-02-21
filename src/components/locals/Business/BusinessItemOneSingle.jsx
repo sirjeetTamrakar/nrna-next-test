@@ -3,9 +3,9 @@ import MissionSection from "@/components/globals/MissionSection";
 import BannerBannerSection from "@/components/globals/SingleBanner";
 import VisionSection from "@/components/globals/VisionSection";
 import { getAllHomeData, getSiteSettings } from "@/redux/homepage/actions";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
 import BusinessNav from "./BusinessNav";
 
 const BusinessItemOneSingle = () => {
@@ -29,9 +29,9 @@ const BusinessItemOneSingle = () => {
 
   const [selected, setSelected] = useState("home");
 
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const handleFunction = (data) => {
-    navigate(data);
+    navigate.push(data);
   };
   const homeOptions = (home_data?.data?.slice(0, 4) || []).map((item) => ({
     title: item?.tabtitle,
@@ -42,7 +42,7 @@ const BusinessItemOneSingle = () => {
   //     { title: 'Home', value: 'home', clickFunction: () => handleFunction('/nrna/business') }
   //   ];
 
-  const allOptions = [...homeOptions];
+  const allOptions = [...(homeOptions || [])];
 
   // Map home_data into MissionSection and VisionSection in an alternating way
   const renderSections = () => {

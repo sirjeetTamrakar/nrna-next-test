@@ -1,20 +1,20 @@
-import { Box, Container, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useStyles } from './styles';
+import { Box, Container, Typography } from "@mui/material";
+import { useRouter } from "next/router";
+import { useStyles } from "./styles";
 
 const NccNav = ({ category, selected, setSelected, setSearch }) => {
   const classes = useStyles();
-  const navigate = useNavigate();
+  const navigate = useRouter();
 
   const checkActive = (slug) => {
     if (selected) {
       if (slug === selected) {
-        return 'navActive';
-      } else return '';
+        return "navActive";
+      } else return "";
     } else if (slug === category?.[0]?.value) {
-      return 'navActive';
+      return "navActive";
     } else {
-      return '';
+      return "";
     }
   };
   // const handleSearch = (e) => {
@@ -23,13 +23,13 @@ const NccNav = ({ category, selected, setSelected, setSearch }) => {
   const handleSetSelected = (slug) => {
     setSelected(slug);
 
-    slug !== 'home' && navigate(`/nrna/ncc/${slug}`, { state: slug });
-    slug === 'home' && navigate(`/nrna/ncc`, { state: slug });
+    slug !== "home" && navigate.push(`/nrna/ncc/${slug}?state=${slug}`);
+    slug === "home" && navigate.push(`/nrna/ncc?state=${slug}`);
   };
   return (
     <Box className={classes.rootNav}>
       <Container>
-        <Box sx={{ padding: '10px 0px' }} className={classes.header}>
+        <Box sx={{ padding: "10px 0px" }} className={classes.header}>
           <Typography variant="h5" className={classes.title}>
             Get to know about NCC
           </Typography>
@@ -37,8 +37,9 @@ const NccNav = ({ category, selected, setSelected, setSearch }) => {
         </Box>
         <ul className={classes.list}>
           <li
-            className={selected === 'home' && 'navActive'}
-            onClick={() => handleSetSelected('home')}>
+            className={selected === "home" && "navActive"}
+            onClick={() => handleSetSelected("home")}
+          >
             Home
             {/* {JSON.stringify({ selected })} */}
           </li>
@@ -46,8 +47,9 @@ const NccNav = ({ category, selected, setSelected, setSearch }) => {
             <li
               className={checkActive(list?.value)}
               key={index}
-              onClick={() => handleSetSelected(list?.value)}>
-              <div style={{ width: 'max-content' }}>{list?.title}</div>
+              onClick={() => handleSetSelected(list?.value)}
+            >
+              <div style={{ width: "max-content" }}>{list?.title}</div>
             </li>
           ))}
         </ul>

@@ -5,14 +5,14 @@ import CustomPasswordInput from "@/components/common/Form/CustomPasswordInput";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { completeRegistration } from "@/redux/auth/actions";
 import { Box } from "@mui/material";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import * as Yup from "yup";
 const CompleteRegistration = () => {
   const defaultValues = {};
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [params] = useSearchParams();
+  const navigate = useRouter();
+  const { token } = navigate?.query;
   const { loading } = useSelector((state) => state.auth);
   const validationSchema = Yup.object({
     password: Yup.string().required("Please enter your password"),
@@ -22,13 +22,13 @@ const CompleteRegistration = () => {
   });
 
   const handleSuccess = () => {
-    navigate("/");
+    navigate.push("/");
   };
 
   const onSubmit = (data) => {
     const finalData = {
       ...data,
-      token: params?.get("token"),
+      token,
     };
     dispatch(completeRegistration(finalData, handleSuccess));
   };

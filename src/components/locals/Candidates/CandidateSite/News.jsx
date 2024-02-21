@@ -4,9 +4,9 @@ import {
   getNewsCategory,
   getSingleUser,
 } from "@/redux/homepage/actions";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
 import SecondaryNav from "./SecondaryNav";
 
 const News = () => {
@@ -44,9 +44,9 @@ const News = () => {
   // ];
 
   const dispatch = useDispatch();
-  const { candidate } = useParams();
+  const { candidate } = useRouter()?.query;
 
-  const location = useLocation();
+  const location = useRouter();
 
   const { news, news_category, single_user } = useSelector(
     (state) => state.homepage
@@ -59,14 +59,18 @@ const News = () => {
   }, [location?.state, news_category]);
   const [search, setSearch] = useState("");
   useEffect(() => {
-    dispatch(getSingleUser(candidate));
-    dispatch(
-      getAllNews({
-        type: single_user?.role_name,
-        id: single_user?.id,
-        limit: 100,
-      })
-    );
+    candidate && dispatch(getSingleUser(candidate));
+  }, [candidate]);
+  useEffect(() => {
+    single_user &&
+      dispatch(
+        getAllNews({
+          user_id: single_user?.id,
+          limit: 100,
+        })
+      );
+  }, [single_user]);
+  useEffect(() => {
     dispatch(getNewsCategory());
   }, []);
 
@@ -100,7 +104,7 @@ const News = () => {
                   <NewsCard
                     key={newsItem.id}
                     news={newsItem}
-                    linkUrl={`/our-team/${candidate}/news/${newsItem?.slug}`}
+                    linkUrl={`/${candidate}/news/${newsItem?.slug}`}
                   />
                 ))
               ) : (

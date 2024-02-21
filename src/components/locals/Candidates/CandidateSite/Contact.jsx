@@ -6,10 +6,10 @@ import CustomTextArea from "@/components/common/Form/CustomTextarea";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { getSingleUser, teamsContactUs } from "@/redux/homepage/actions";
 import { Box, Grid } from "@mui/material";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import * as Yup from "yup";
 import { useStyles } from "./styles";
 
@@ -78,9 +78,9 @@ const Contact = () => {
 const FormComponent = ({ singleUser, loading }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { candidate } = useParams();
+  const { candidate } = useRouter()?.query;
   useEffect(() => {
-    dispatch(getSingleUser(candidate));
+    candidate && dispatch(getSingleUser(candidate));
   }, [candidate]);
   const { reset } = useFormContext({});
 

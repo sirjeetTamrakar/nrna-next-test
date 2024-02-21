@@ -1,9 +1,8 @@
 import { changeDateFormat } from "@/utils/dateUtils";
-import { useLocation } from "react-router-dom";
+import { useRouter } from "next/router";
 
 const SingleDownload = () => {
-  const { state } = useLocation();
-
+  const state = useRouter()?.query;
   return (
     <>
       <div className="main_content">

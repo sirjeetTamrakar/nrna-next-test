@@ -1,22 +1,15 @@
-import { Box } from "@mui/material";
 // import SecondaryNav from '@/components/globals/secondaryNav';
 import SecondaryNav from "@/components/globals/SecondaryNav";
 import { getSingleUser } from "@/redux/homepage/actions";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
 
-const CandidateLayout = () => {
+const CandidateLayout = ({ children }) => {
   return (
     <>
-      <Navbar />
       <SecondaryNavWrapper />
-      <Box>
-        <Outlet />
-      </Box>
-      <Footer />
+      {children}
     </>
   );
 };
@@ -24,15 +17,15 @@ const CandidateLayout = () => {
 const SecondaryNavWrapper = () => {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState("home");
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const { candidate } = useParams();
+  const navigate = useRouter();
+  const { pathname } = navigate;
+  const { candidate } = navigate?.query;
   const handleFunction = (data) => {
-    navigate(data);
+    navigate.push(data);
   };
   const { single_user } = useSelector((state) => state.homepage);
   useEffect(() => {
-    dispatch(getSingleUser(candidate));
+    candidate && dispatch(getSingleUser(candidate));
   }, [candidate]);
   useEffect(() => {
     pathname &&

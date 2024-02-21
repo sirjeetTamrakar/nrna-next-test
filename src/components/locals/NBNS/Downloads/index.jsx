@@ -37,7 +37,7 @@ const Downloads = () => {
             }}
           >
             <Link
-              href={`${row?.id}`}
+              href={`/nbns/download/${row?.id}?title=${row?.title}&file_src=${row?.file}&updatedDate=${row?.updated_at}&description=${row?.description}`}
               state={{
                 title: row?.title,
                 file_src: row?.file,

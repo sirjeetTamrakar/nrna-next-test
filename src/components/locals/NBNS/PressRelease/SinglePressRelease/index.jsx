@@ -4,13 +4,14 @@ import {
 } from "@/redux/homepage/actions";
 import { changeDateFormat } from "@/utils/dateUtils";
 import { Box, CircularProgress, Grid } from "@mui/material";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
 
 const SinglePressRelease = () => {
   const dispatch = useDispatch();
-  const { slug } = useParams();
+  const { slug } = useRouter()?.query;
   const pathname = window.location.pathname;
 
   useEffect(() => {
@@ -24,9 +25,11 @@ const SinglePressRelease = () => {
     .slice(0, 4);
 
   useEffect(() => {
-    dispatch(getSinglePressRelease(slug));
-    dispatch(getPressRelease());
+    slug && dispatch(getSinglePressRelease(slug));
   }, [slug]);
+  useEffect(() => {
+    dispatch(getPressRelease());
+  }, []);
 
   return (
     <>
@@ -65,13 +68,20 @@ const SinglePressRelease = () => {
                       )}{" "}
                       | Created by: {single_press_release?.user}
                     </div>
-
-                    <div
-                      className="single_news_page_long"
-                      dangerouslySetInnerHTML={{
-                        __html: single_press_release?.description,
+                    <Box
+                      sx={{
+                        "& img": {
+                          width: "100% !important",
+                        },
                       }}
-                    ></div>
+                    >
+                      <div
+                        className="single_news_page_long"
+                        dangerouslySetInnerHTML={{
+                          __html: single_press_release?.description,
+                        }}
+                      ></div>
+                    </Box>
                   </>
                 </div>
               </Grid>

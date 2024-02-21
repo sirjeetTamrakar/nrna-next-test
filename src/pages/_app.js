@@ -1,4 +1,5 @@
 import BusinessLayout from "@/layouts/authLayout/BusinessLayout";
+import CandidateLayout from "@/layouts/authLayout/CandidateLayout";
 import Footer from "@/layouts/authLayout/Footer";
 import NBNSLayout from "@/layouts/authLayout/NBNSLayout";
 import NCCLayout from "@/layouts/authLayout/NCCLayout";
@@ -21,8 +22,10 @@ import "../styles/main.scss";
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const [isClient, setIsClient] = useState(
-    router.pathname.startsWith("/news/") || false
+    router.pathname.includes("/news/") || false
   );
+  // router.pathname.includes("/news/") ||
+  console.log({ router });
 
   useEffect(() => {
     setIsClient(true);
@@ -44,7 +47,7 @@ export default function App({ Component, pageProps }) {
           </ThemeProvider>
         </Provider>
       ) : (
-        <h1>Loading....</h1>
+        <></>
       )}
     </>
   );
@@ -66,6 +69,10 @@ const Layouts = ({ Component, pageProps }) => {
     DynamicLayout = NCCLayout;
   } else if (router.pathname.startsWith("/business/")) {
     DynamicLayout = BusinessLayout;
+  } else if (router.pathname.startsWith("/business/")) {
+    DynamicLayout = BusinessLayout;
+  } else if (router.pathname.startsWith("/[candidate]")) {
+    DynamicLayout = CandidateLayout;
   } else {
     // Default layout for other pages
     DynamicLayout = ({ children }) => <>{children}</>;
