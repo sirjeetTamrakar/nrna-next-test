@@ -1,16 +1,16 @@
 import PageBanner from "@/components/globals/PageBanner";
 import TaglineSection from "@/components/globals/TaglineSection";
 import { getSingleHomeData } from "@/redux/homepage/actions";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 
 const NbnsTabComponent = ({ siteSettingImages, about, title }) => {
   const dispatch = useDispatch();
   const { single_home_data } = useSelector((state) => state.homepage);
-  const { slug } = useParams();
+  const { slug } = useRouter()?.query;
   useEffect(() => {
-    dispatch(getSingleHomeData(slug));
+    slug && dispatch(getSingleHomeData(slug));
   }, [slug]);
 
   return (
