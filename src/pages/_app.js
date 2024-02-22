@@ -28,7 +28,6 @@ export default function App({ Component, pageProps }) {
       false
   );
   // router.pathname.includes("/news/") ||
-  console.log({ router });
 
   useEffect(() => {
     setIsClient(true);
