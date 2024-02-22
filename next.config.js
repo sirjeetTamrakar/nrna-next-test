@@ -4,4 +4,7 @@ module.exports = {
     VITE_APP_API: "https://api.nrnaglobal.com",
     VITE_APP_DEBUG_MODE: true,
   },
+  experimental: {
+    esmExternals: true,
+  },
 };
