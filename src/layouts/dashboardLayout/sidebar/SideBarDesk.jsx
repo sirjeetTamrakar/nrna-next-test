@@ -1,4 +1,5 @@
 import Logo from "@/assets/images/nrna.png";
+import { useGetSidebar } from "@/constants/SidebarConstants";
 import { ExpandMore } from "@mui/icons-material";
 import { Box, Collapse, Typography } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
@@ -8,10 +9,11 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { styled } from "@mui/material/styles";
-import { useGetSidebar } from "constants/SidebarConstants";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import useStyles from "./styles";
 
 const drawerWidth = 240;
@@ -63,8 +65,8 @@ const Drawer = styled(MuiDrawer, {
 
 export default function SidebarDesk() {
   const { SidebarConstants } = useGetSidebar();
-
   const classes = useStyles();
+  const pathname = usePathname();
   const [open, setOpen] = React.useState(sessionStorage.getItem("active"));
 
   const handleClick = (item) => {
@@ -75,6 +77,7 @@ export default function SidebarDesk() {
   const { user, role_details, admin_role_details } = useSelector(
     (state) => state.auth
   );
+  const isActive = (href) => pathname?.includes(href);
 
   // --------------------
 
@@ -84,7 +87,7 @@ export default function SidebarDesk() {
         <Box className={classes.drawer}>
           <DrawerHeader>
             <Box className={classes.drawerHeader}>
-              <img src={Logo} />
+              <Image src={Logo} />
             </Box>
           </DrawerHeader>
           <NavBarByRoles
@@ -129,10 +132,10 @@ export default function SidebarDesk() {
                         sx={{ display: "block", paddingBottom: "5px" }}
                         className={classes.nav}
                       >
-                        <NavLink
-                          to={!item?.children?.length && item?.url}
-                          className={({ isActive }) =>
-                            isActive &&
+                        <Link
+                          href={item?.children?.length ? "" : item?.url}
+                          className={
+                            isActive(item?.url) &&
                             (item?.children?.length
                               ? item?.children?.some((nestedItem) =>
                                   window.location.pathname.includes(
@@ -144,58 +147,56 @@ export default function SidebarDesk() {
                               : classes.activeClass)
                           }
                         >
-                          {({ isActive }) => (
-                            <ListItemButton
-                              className={classes.listItemButton}
-                              onClick={() =>
-                                item?.children?.length !== 0
-                                  ? handleClick(item)
-                                  : handleClick()
-                              }
-                              style={{
-                                background: open === item?.label && "#f6f6f6",
+                          <ListItemButton
+                            className={classes.listItemButton}
+                            onClick={() =>
+                              item?.children?.length !== 0
+                                ? handleClick(item)
+                                : handleClick()
+                            }
+                            style={{
+                              background: open === item?.label && "#f6f6f6",
+                            }}
+                          >
+                            <ListItemIcon
+                              sx={{
+                                minWidth: 0,
+                                mr: 2,
+                                justifyContent: "center",
                               }}
                             >
-                              <ListItemIcon
-                                sx={{
-                                  minWidth: 0,
-                                  mr: 2,
-                                  justifyContent: "center",
-                                }}
-                              >
-                                <img
-                                  style={{ height: "20px", width: "20px" }}
-                                  src={
-                                    isActive
-                                      ? item?.children?.length
-                                        ? item?.children?.some((nestedItem) =>
-                                            window.location.pathname.includes(
-                                              nestedItem.url
-                                            )
+                              <Image
+                                style={{ height: "20px", width: "20px" }}
+                                src={
+                                  isActive(item?.url)
+                                    ? item?.children?.length
+                                      ? item?.children?.some((nestedItem) =>
+                                          window.location.pathname.includes(
+                                            nestedItem.url
                                           )
-                                          ? item?.activeIcon
-                                          : item?.icon
-                                        : item?.activeIcon
-                                      : item?.icon
-                                  }
-                                />
-                              </ListItemIcon>
+                                        )
+                                        ? item?.activeIcon
+                                        : item?.icon
+                                      : item?.activeIcon
+                                    : item?.icon
+                                }
+                              />
+                            </ListItemIcon>
 
-                              <ListItemText primary={item?.label} />
-                              {item?.children?.length !== 0 && (
-                                <ExpandMore
-                                  sx={{
-                                    transition: "transform 0.3s",
-                                    transform:
-                                      open === item?.label
-                                        ? "rotate(-180deg)"
-                                        : "rotate(0deg)",
-                                  }}
-                                />
-                              )}
-                            </ListItemButton>
-                          )}
-                        </NavLink>
+                            <ListItemText primary={item?.label} />
+                            {item?.children?.length !== 0 && (
+                              <ExpandMore
+                                sx={{
+                                  transition: "transform 0.3s",
+                                  transform:
+                                    open === item?.label
+                                      ? "rotate(-180deg)"
+                                      : "rotate(0deg)",
+                                }}
+                              />
+                            )}
+                          </ListItemButton>
+                        </Link>
 
                         <Collapse
                           in={open === item?.label}
@@ -208,13 +209,15 @@ export default function SidebarDesk() {
                                 child={child}
                                 key={index}
                                 classes={classes}
+                                isActive={isActive}
                               />
                             ))}
                           </Box>
                         </Collapse>
                       </ListItem>
                     );
-                  } else return false;
+                  } else {
+                  }
                 })}
               </List>
             ))}
@@ -251,8 +254,8 @@ const NavBarByRoles = ({ role_details, user, handleClick, open }) => {
                     sx={{ display: "block", paddingBottom: "5px" }}
                     className={classes.nav}
                   >
-                    <NavLink
-                      to={!item?.children?.length && item?.url}
+                    <Link
+                      href={item?.children?.length ? "" : item?.url}
                       className={({ isActive }) =>
                         isActive &&
                         (item?.children?.length
@@ -315,7 +318,7 @@ const NavBarByRoles = ({ role_details, user, handleClick, open }) => {
                           )}
                         </ListItemButton>
                       )}
-                    </NavLink>
+                    </Link>
 
                     <Collapse
                       in={open === item?.label}
@@ -369,8 +372,8 @@ const NavBarByRoleNCC = ({ role_details, user, handleClick, open }) => {
                     sx={{ display: "block", paddingBottom: "5px" }}
                     className={classes.nav}
                   >
-                    <NavLink
-                      to={!item?.children?.length && item?.url}
+                    <Link
+                      href={item?.children?.length ? "" : item?.url}
                       className={({ isActive }) =>
                         isActive &&
                         (item?.children?.length
@@ -433,7 +436,7 @@ const NavBarByRoleNCC = ({ role_details, user, handleClick, open }) => {
                           )}
                         </ListItemButton>
                       )}
-                    </NavLink>
+                    </Link>
 
                     <Collapse
                       in={open === item?.label}
@@ -490,8 +493,8 @@ const NavBarByRoleSuperadmin = ({
                     sx={{ display: "block", paddingBottom: "5px" }}
                     className={classes.nav}
                   >
-                    <NavLink
-                      to={!item?.children?.length && item?.url}
+                    <Link
+                      href={item?.children?.length ? "" : item?.url}
                       className={({ isActive }) =>
                         isActive &&
                         (item?.children?.length
@@ -554,7 +557,7 @@ const NavBarByRoleSuperadmin = ({
                           )}
                         </ListItemButton>
                       )}
-                    </NavLink>
+                    </Link>
 
                     <Collapse
                       in={open === item?.label}
@@ -587,6 +590,7 @@ const ChildComponent = ({
   classes,
   admin_role_details,
   role_details,
+  isActive,
 }) => {
   const { user } = useSelector((state) => state.auth);
   const filterData = child?.roles?.includes(user?.role_name);
@@ -600,25 +604,23 @@ const ChildComponent = ({
           sx={{ paddingBottom: "5px" }}
           className={classes.nav}
         >
-          <NavLink to={child?.url}>
-            {({ isActive }) => (
-              <ListItemButton
-                className={[
-                  classes.listItemButtonChild,
-                  isActive && classes.activeChildClass,
-                ]}
-              >
-                <ListItemText
-                  disableTypography
-                  primary={
-                    <Typography variant="body2">{child?.label}</Typography>
-                  }
-                  className="active"
-                  primaryTypographyProps="h2"
-                />
-              </ListItemButton>
-            )}
-          </NavLink>
+          <Link href={child?.url}>
+            <ListItemButton
+              className={[
+                classes.listItemButtonChild,
+                isActive(child?.url) && classes.activeChildClass,
+              ]}
+            >
+              <ListItemText
+                disableTypography
+                primary={
+                  <Typography variant="body2">{child?.label}</Typography>
+                }
+                className="active"
+                primaryTypographyProps="h2"
+              />
+            </ListItemButton>
+          </Link>
         </List>
       </>
     );

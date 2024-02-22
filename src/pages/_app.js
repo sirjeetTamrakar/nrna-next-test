@@ -4,6 +4,7 @@ import Footer from "@/layouts/authLayout/Footer";
 import NBNSLayout from "@/layouts/authLayout/NBNSLayout";
 import NCCLayout from "@/layouts/authLayout/NCCLayout";
 import Navbar from "@/layouts/authLayout/Navbar";
+import MainLayout from "@/layouts/dashboardLayout";
 import { setGlobalUser } from "@/redux/auth/actions";
 import { getContinents, getSiteSettings } from "@/redux/homepage/actions";
 import Store from "@/redux/store";
@@ -22,7 +23,9 @@ import "../styles/main.scss";
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const [isClient, setIsClient] = useState(
-    router.pathname.includes("/news/") || false
+    (router.pathname.includes("/news/") &&
+      !router.pathname.includes("/dashboard")) ||
+      false
   );
   // router.pathname.includes("/news/") ||
   console.log({ router });
@@ -80,11 +83,19 @@ const Layouts = ({ Component, pageProps }) => {
 
   return (
     <>
-      <Navbar />
-      <DynamicLayout>
-        <Component {...pageProps} />
-      </DynamicLayout>
-      <Footer />
+      {router.pathname.startsWith("/dashboard") ? (
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
+      ) : (
+        <>
+          <Navbar />
+          <DynamicLayout>
+            <Component {...pageProps} />
+          </DynamicLayout>
+          <Footer />
+        </>
+      )}
     </>
   );
 };

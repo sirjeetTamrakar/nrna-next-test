@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { useLocation, useMatch } from "react-router-dom";
+import { useRouter } from "next/router";
 function CustomBreadcrumbs({ data }) {
-  const location = useLocation();
-  const matches = useMatch(":path/*");
+  const location = useRouter();
+  // const matches = useMatch(":path/*");
+  const matches = "";
   const paths = location.pathname.split("/").filter(Boolean);
   const isClickable = (path) => {
     // Define the paths where you want to disable the onClick event

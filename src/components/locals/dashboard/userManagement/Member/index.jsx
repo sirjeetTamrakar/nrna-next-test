@@ -24,8 +24,9 @@ import { getCountries, getNCC } from "../../ncc/redux/actions";
 import ExcelDownloadButton from "@/components/common/CustomExcelFileDownload";
 import CustomDeleteModal from "@/components/common/CustomModal/CustomDeleteModal";
 import CustomInput from "@/components/common/Form/CustomInput";
+import { stringifyData } from "@/helpers";
+import { useDebounce } from "@/utils";
 import { useFormContext } from "react-hook-form";
-import { useDebounce } from "utils";
 import {
   changeApproval,
   changeStatus,
@@ -372,7 +373,7 @@ const Member = () => {
 
   useEffect(() => {
     refetch();
-  }, [page, rowsPerPage, filteredNcc?.nccID1]);
+  }, stringifyData([page, rowsPerPage, filteredNcc?.nccID1]));
 
   useEffect(() => {
     dispatch(getAllUsersDownload());

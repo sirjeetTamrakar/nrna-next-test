@@ -24,10 +24,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
+import { useRouter } from "next/router";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import useStyles from "./Styles";
 
 export default function AccountMenu() {
@@ -57,7 +57,7 @@ export default function AccountMenu() {
   const open = Boolean(anchorEl);
   const roleOpen = Boolean(changeEl);
 
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const classes = useStyles();
 
   const handleClick = (event) => {
@@ -81,31 +81,31 @@ export default function AccountMenu() {
 
   const handleLogout = () => {
     logout();
-    navigate(`/`);
+    navigate.push(`/`);
   };
 
   const handlePasswordChange = () => {
-    navigate(`/password-reset`);
+    navigate.push(`/password-reset`);
   };
 
   const goToHome = () => {
-    navigate("/");
+    navigate.push("/");
   };
 
   const handleRoleNcc = () => {
     userRole === "member" && setUserRole("ncc");
-    navigate(`/dashboard`);
+    navigate.push(`/dashboard`);
   };
   const handleRoleMember = () => {
     userRole === "ncc" && setUserRole("member");
-    navigate(`/dashboard`);
+    navigate.push(`/dashboard`);
   };
   useEffect(() => {
     dispatch(saveRoleDetails(userRole));
   }, [userRole]);
 
   const handleSuperadminRoleNcc = () => {
-    navigate(`/dashboard`);
+    navigate.push(`/dashboard`);
     formOpenFunction();
   };
 
@@ -116,7 +116,7 @@ export default function AccountMenu() {
     setStoredValue(null);
     setNCCName(null);
     setStoredRole("admin");
-    navigate(`/dashboard`);
+    navigate.push(`/dashboard`);
   };
 
   useEffect(() => {

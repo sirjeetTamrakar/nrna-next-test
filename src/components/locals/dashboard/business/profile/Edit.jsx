@@ -1,8 +1,8 @@
 import CustomButton from "@/components/common/CustomButton/CustomButton";
 import CustomForm from "@/components/common/Form/CustomForm";
 import CustomFormProvider from "@/components/common/Form/CustomFormProvider";
+import { Roles } from "@/constants/RoleConstant";
 import { Box } from "@mui/material";
-import { Roles } from "constants/RoleConstant";
 import { useDispatch, useSelector } from "react-redux";
 import { updateBusiness } from "../redux/actions";
 import BusinessForm from "./Form";

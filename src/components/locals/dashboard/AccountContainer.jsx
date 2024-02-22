@@ -1,5 +1,5 @@
-import { Roles } from 'constants/RoleConstant';
-import { useSelector } from 'react-redux';
+import { Roles } from "@/constants/RoleConstant";
+import { useSelector } from "react-redux";
 
 const AccountContainer = () => {
   const { user } = useSelector((state) => state.auth);
@@ -10,8 +10,8 @@ const AccountContainer = () => {
       user?.role_name !== Roles?.Member &&
       user?.role_name !== Roles?.NCC ? (
         <p>
-          Your Registration has not been approved yet. Please contact NBNS Global for further
-          Information
+          Your Registration has not been approved yet. Please contact NBNS
+          Global for further Information
         </p>
       ) : (
         <p>Dashboard</p>

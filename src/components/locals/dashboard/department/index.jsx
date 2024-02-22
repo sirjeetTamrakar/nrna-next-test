@@ -2,12 +2,12 @@ import CustomDeleteModal from "@/components/common/CustomModal/CustomDeleteModal
 import CustomModal from "@/components/common/CustomModal/CustomModal";
 import CustomPopover from "@/components/common/CustomPopover/CustomPopover";
 import CustomTable from "@/components/common/table";
+import { Roles } from "@/constants/RoleConstant";
 import useToggle from "@/hooks/useToggle";
 import AddIcon from "@mui/icons-material/Add";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { Box, Button } from "@mui/material";
-import { Roles } from "constants/RoleConstant";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Edit from "./Edit";

@@ -3,13 +3,14 @@ import useScreenSize from "@/hooks/useScreenSize";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, Typography } from "@mui/material";
-import { NavLink, useLocation } from "react-router-dom";
+import { useRouter } from "next/router";
+import { NavLink } from "react-router-dom";
 import AccountMenu from "./AccountMenu";
 import useStyles from "./Styles";
 
 const Navbar = ({ toggleDrawer, drawerOpen }) => {
   const classes = useStyles();
-  const location = useLocation();
+  const location = useRouter();
   const paths = location.pathname.split("/").filter(Boolean);
   const screenSize = useScreenSize();
 

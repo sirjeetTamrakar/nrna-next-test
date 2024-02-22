@@ -45,7 +45,7 @@ function Navbar({ isHomePage, currentUser, sticky }) {
   const [openRegister, openFunctionRegister] = useToggle(false);
 
   const goToDashboard = () => {
-    navigate("/dashboard");
+    navigate.push("/dashboard");
   };
 
   const handleLinkClick = (link) => {

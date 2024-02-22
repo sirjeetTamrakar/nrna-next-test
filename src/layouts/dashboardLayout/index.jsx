@@ -2,13 +2,12 @@ import { getCountries } from "@/components/locals/dashboard/ncc/redux/actions";
 import { Box, Divider } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Outlet } from "react-router-dom";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
 import SidebarDesk from "./sidebar/SideBarDesk";
 import useStyles from "./styles";
 
-const MainLayout = () => {
+const MainLayout = ({ children }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -36,9 +35,7 @@ const MainLayout = () => {
             <Navbar drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />
           </Box>
           <Divider />
-          <Box className={classes.content}>
-            <Outlet />
-          </Box>
+          <Box className={classes.content}>{children} </Box>
         </Box>
       </Box>
     </>

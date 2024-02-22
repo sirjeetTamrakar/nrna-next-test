@@ -1,9 +1,9 @@
 import CustomButton from "@/components/common/CustomButton/CustomButton";
 import CustomForm from "@/components/common/Form/CustomForm";
 import CustomFormProvider from "@/components/common/Form/CustomFormProvider";
+import { Roles } from "@/constants/RoleConstant";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { Box } from "@mui/material";
-import { Roles } from "constants/RoleConstant";
 import { useDispatch, useSelector } from "react-redux";
 import NewsForm from "./Form";
 import { validationSchema } from "./ValidationSchema";

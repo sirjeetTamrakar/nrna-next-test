@@ -136,7 +136,7 @@ export const useGetSidebar = () => {
           children: [
             {
               label: "All Events",
-              url: "/dashboard/events",
+              url: "/dashboard/events/all-events",
               memberProfileNCC: "memberProfileNCC",
               adminProfile: "adminProfile",
               roles: [Roles.Admin, Roles.SuperAdmin, Roles.NCC],
@@ -197,17 +197,17 @@ export const useGetSidebar = () => {
           children: [
             {
               label: "NCC List",
-              url: "/dashboard/ncc",
+              url: "/dashboard/ncc/ncc-list",
               roles: [Roles.Admin, Roles.SuperAdmin],
             },
             {
               label: "NCC Settings",
-              url: "/dashboard/settings/ncc-site",
+              url: "/dashboard/ncc/ncc-site",
               roles: [Roles.Admin, Roles.SuperAdmin],
             },
             {
               label: "Region",
-              url: "/dashboard/settings/region",
+              url: "/dashboard/ncc/region",
               roles: [Roles.Admin, Roles.SuperAdmin],
             },
           ],
@@ -224,7 +224,7 @@ export const useGetSidebar = () => {
           children: [
             {
               label: "Team",
-              url: "/dashboard/our-team",
+              url: "/dashboard/our-team/team",
               memberProfileNCC: "memberProfileNCC",
               adminProfile: "adminProfile",
 
@@ -232,7 +232,7 @@ export const useGetSidebar = () => {
             },
             {
               label: "NFEA Team",
-              url: "/dashboard/nfea-team",
+              url: "/dashboard/our-team/nfea-team",
               memberProfileNCC: "memberProfileNCC",
               adminProfile: "adminProfile",
 

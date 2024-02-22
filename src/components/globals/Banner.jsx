@@ -1,5 +1,5 @@
-import EastIcon from '@mui/icons-material/East';
-import Slider from 'react-slick';
+import EastIcon from "@mui/icons-material/East";
+import Slider from "react-slick";
 const BannerSection = ({ banners }) => {
   var settings = {
     // dots: true,
@@ -8,7 +8,7 @@ const BannerSection = ({ banners }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000
+    autoplaySpeed: 5000,
   };
   return (
     <div className="home-slick">
@@ -18,12 +18,15 @@ const BannerSection = ({ banners }) => {
             <div key={index}>
               <section className="banner">
                 <div
-                  className={`banner_item ${banner.title !== '' ? 'overlay' : ''}`}
+                  className={`banner_item ${
+                    banner.title !== "" ? "overlay" : ""
+                  }`}
                   style={{
                     backgroundImage: `url('${banner.image}')`,
-                    backgroundPosition: 'center',
-                    backgroundSize: 'cover'
-                  }}>
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                  }}
+                >
                   <div className="container">
                     <div className="banner_wrapper">
                       <div>
@@ -35,7 +38,8 @@ const BannerSection = ({ banners }) => {
                               href={banner.link}
                               target="_blank"
                               className="btn-lg"
-                              rel="noreferrer">
+                              rel="noreferrer"
+                            >
                               View More
                               <EastIcon className="button_wrapper_icon" />
                             </a>
@@ -54,9 +58,10 @@ const BannerSection = ({ banners }) => {
               <div
                 className={`banner_item overlay`}
                 style={{
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover'
-                }}>
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                }}
+              >
                 <div className="container">
                   <div className="banner_wrapper">
                     <div>
