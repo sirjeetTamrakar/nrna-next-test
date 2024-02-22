@@ -19,7 +19,7 @@ const ContactTable = ({ serviceId, data }) => {
   const [detail, setDetail] = useState();
   const [page, setPage] = useState();
   const [rowsPerPage, setRowsPerPage] = useState();
-  const [setSingleService] = useState();
+  const [singleService, setSingleService] = useState();
   const classes = useStyles();
 
   const { business_service, get_business_service_loading } = useSelector(
@@ -31,7 +31,7 @@ const ContactTable = ({ serviceId, data }) => {
   }, []);
 
   useEffect(() => {
-    const single = business_service?.filter(
+    const single = (business_service?.data || [])?.filter(
       (list) => list?.business_id == serviceId
     );
     setSingleService(single);

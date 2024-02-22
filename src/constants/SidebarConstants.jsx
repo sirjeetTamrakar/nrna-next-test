@@ -268,7 +268,7 @@ export const useGetSidebar = () => {
           children: [
             {
               label: "Survey List",
-              url: "/dashboard/survey/site",
+              url: "/dashboard/survey/survey-list",
               roles: [Roles.Admin, Roles.SuperAdmin],
             },
             {
@@ -326,7 +326,7 @@ export const useGetSidebar = () => {
             },
             {
               label: "Business Settings",
-              url: "/dashboard/settings/business-site",
+              url: "/dashboard/business/business-settings",
               // memberProfileNCC: 'memberProfileNCC',
 
               roles: [Roles.Admin, Roles.SuperAdmin],

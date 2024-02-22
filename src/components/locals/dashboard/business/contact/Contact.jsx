@@ -6,8 +6,7 @@ import useToggle from "@/hooks/useToggle";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PersonIcon from "@mui/icons-material/Person";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Box, Typography } from "@mui/material";
-import Button from "@mui/material/Button/Button";
+import { Box, Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteBusinessContact, getBusinessContact } from "../redux/actions";
@@ -29,8 +28,8 @@ const Contact = () => {
     const finalData = {
       user_id: user?.id,
     };
-    dispatch(getBusinessContact({ finalData }));
-  }, []);
+    user?.id && dispatch(getBusinessContact({ finalData }));
+  }, [user?.id]);
 
   const { contact, contact_loading, delete_business_contact_loading } =
     useSelector((state) => state.business);

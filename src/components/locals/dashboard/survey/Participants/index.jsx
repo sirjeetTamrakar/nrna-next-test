@@ -3,15 +3,14 @@ import CustomTable from "@/components/common/table";
 import { changeDateFormat } from "@/utils/dateUtils";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box, Button, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
 import { getParticipants } from "../redux/actions";
 
 const Participants = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate = useRouter();
   const [page, setPage] = useState();
   const [rowsPerPage, setRowsPerPage] = useState();
   const { participants, participants_loading } = useSelector(
@@ -71,9 +70,9 @@ const Participants = () => {
               color="success"
               sx={{ width: "100px" }}
               onClick={() =>
-                navigate(`/dashboard/survey/result/participants/${row?.id}`, {
-                  state: location,
-                })
+                navigate.push(
+                  `/dashboard/survey/result/participants/${row?.id}?slug=${navigate?.query?.slug}`
+                )
               }
             >
               View
@@ -85,8 +84,8 @@ const Participants = () => {
   ];
 
   useEffect(() => {
-    dispatch(getParticipants(location?.state?.slug));
-  }, []);
+    navigate?.query?.slug && dispatch(getParticipants(navigate?.query?.slug));
+  }, [navigate?.query?.slug]);
 
   return (
     <>
@@ -106,7 +105,7 @@ const Participants = () => {
               color: "#2196f3",
               marginBottom: "20px",
             }}
-            onClick={() => navigate(-1)}
+            onClick={() => navigate.back()}
           />
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box>Survey Participants</Box>

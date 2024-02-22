@@ -6,11 +6,10 @@ import CustomTable from "@/components/common/table";
 import useToggle from "@/hooks/useToggle";
 import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import { Box, Button } from "@mui/material";
-import Typography from "@mui/material/Typography/Typography";
+import { Box, Button, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import Questions from "../Question";
 import {
   changeSurveyStatus,
@@ -24,7 +23,7 @@ import { useStyles } from "./styles";
 
 const SurveyListResult = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const [openForm, formOpenFunction] = useToggle(false);
   const [openEdit, editOpenFunction] = useToggle(false);
   const [openDelete, deleteOpenFunction] = useToggle(false);
@@ -196,12 +195,12 @@ const SurveyListResult = () => {
 
   const handleShowQuestions = (row) => {
     setDetail(row);
-    navigate(`/dashboard/survey/result/result-list`, { state: row });
+    navigate.push(`/dashboard/survey/result/result-list?slug=${row?.slug}`);
   };
 
   const handleShowParticipants = (row) => {
     setDetail(row);
-    navigate(`/dashboard/survey/result/participants`, { state: row });
+    navigate.push(`/dashboard/survey/result/participants?slug=${row?.slug}`);
   };
 
   const refetch = () => {

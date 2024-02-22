@@ -95,12 +95,14 @@ export default function SidebarDesk() {
             role_details={role_details}
             user={user}
             handleClick={handleClick}
+            isActive={isActive}
           />
           <NavBarByRoleNCC
             open={open}
             role_details={role_details}
             user={user}
             handleClick={handleClick}
+            isActive={isActive}
           />
           {admin_role_details !== "admin" && (
             <NavBarByRoleSuperadmin
@@ -108,6 +110,7 @@ export default function SidebarDesk() {
               role_details={admin_role_details}
               user={user}
               handleClick={handleClick}
+              isActive={isActive}
             />
           )}
           {user?.role_name !== "ncc" &&
@@ -227,7 +230,7 @@ export default function SidebarDesk() {
   );
 }
 
-const NavBarByRoles = ({ role_details, user, handleClick, open }) => {
+const NavBarByRoles = ({ role_details, user, handleClick, open, isActive }) => {
   const classes = useStyles();
   const { SidebarConstants } = useGetSidebar();
   return (
@@ -256,8 +259,8 @@ const NavBarByRoles = ({ role_details, user, handleClick, open }) => {
                   >
                     <Link
                       href={item?.children?.length ? "" : item?.url}
-                      className={({ isActive }) =>
-                        isActive &&
+                      className={
+                        isActive(item?.url) &&
                         (item?.children?.length
                           ? item?.children?.some((nestedItem) =>
                               window.location.pathname.includes(nestedItem.url)
@@ -267,57 +270,55 @@ const NavBarByRoles = ({ role_details, user, handleClick, open }) => {
                           : classes.activeClass)
                       }
                     >
-                      {({ isActive }) => (
-                        <ListItemButton
-                          className={classes.listItemButton}
-                          onClick={() =>
-                            item?.children?.length !== 0
-                              ? handleClick(item)
-                              : handleClick()
-                          }
-                          style={{
-                            background: open === item?.label && "#f6f6f6",
+                      <ListItemButton
+                        className={classes.listItemButton}
+                        onClick={() =>
+                          item?.children?.length !== 0
+                            ? handleClick(item)
+                            : handleClick()
+                        }
+                        style={{
+                          background: open === item?.label && "#f6f6f6",
+                        }}
+                      >
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                            mr: 2,
+                            justifyContent: "center",
                           }}
                         >
-                          <ListItemIcon
-                            sx={{
-                              minWidth: 0,
-                              mr: 2,
-                              justifyContent: "center",
-                            }}
-                          >
-                            <img
-                              style={{ height: "20px", width: "20px" }}
-                              src={
-                                isActive
-                                  ? item?.children?.length
-                                    ? item?.children?.some((nestedItem) =>
-                                        window.location.pathname.includes(
-                                          nestedItem.url
-                                        )
+                          <Image
+                            style={{ height: "20px", width: "20px" }}
+                            src={
+                              isActive(item?.url)
+                                ? item?.children?.length
+                                  ? item?.children?.some((nestedItem) =>
+                                      window.location.pathname.includes(
+                                        nestedItem.url
                                       )
-                                      ? item?.activeIcon
-                                      : item?.icon
-                                    : item?.activeIcon
-                                  : item?.icon
-                              }
-                            />
-                          </ListItemIcon>
+                                    )
+                                    ? item?.activeIcon
+                                    : item?.icon
+                                  : item?.activeIcon
+                                : item?.icon
+                            }
+                          />
+                        </ListItemIcon>
 
-                          <ListItemText primary={item?.label} />
-                          {item?.children?.length !== 0 && (
-                            <ExpandMore
-                              sx={{
-                                transition: "transform 0.3s",
-                                transform:
-                                  open === item?.label
-                                    ? "rotate(-180deg)"
-                                    : "rotate(0deg)",
-                              }}
-                            />
-                          )}
-                        </ListItemButton>
-                      )}
+                        <ListItemText primary={item?.label} />
+                        {item?.children?.length !== 0 && (
+                          <ExpandMore
+                            sx={{
+                              transition: "transform 0.3s",
+                              transform:
+                                open === item?.label
+                                  ? "rotate(-180deg)"
+                                  : "rotate(0deg)",
+                            }}
+                          />
+                        )}
+                      </ListItemButton>
                     </Link>
 
                     <Collapse
@@ -331,6 +332,7 @@ const NavBarByRoles = ({ role_details, user, handleClick, open }) => {
                             child={child}
                             key={index}
                             classes={classes}
+                            isActive={isActive}
                           />
                         ))}
                       </Box>
@@ -344,7 +346,13 @@ const NavBarByRoles = ({ role_details, user, handleClick, open }) => {
     </>
   );
 };
-const NavBarByRoleNCC = ({ role_details, user, handleClick, open }) => {
+const NavBarByRoleNCC = ({
+  role_details,
+  user,
+  handleClick,
+  open,
+  isActive,
+}) => {
   const classes = useStyles();
   const { SidebarConstants } = useGetSidebar();
   return (
@@ -374,8 +382,8 @@ const NavBarByRoleNCC = ({ role_details, user, handleClick, open }) => {
                   >
                     <Link
                       href={item?.children?.length ? "" : item?.url}
-                      className={({ isActive }) =>
-                        isActive &&
+                      className={
+                        isActive(item?.url) &&
                         (item?.children?.length
                           ? item?.children?.some((nestedItem) =>
                               window.location.pathname.includes(nestedItem.url)
@@ -385,57 +393,55 @@ const NavBarByRoleNCC = ({ role_details, user, handleClick, open }) => {
                           : classes.activeClass)
                       }
                     >
-                      {({ isActive }) => (
-                        <ListItemButton
-                          className={classes.listItemButton}
-                          onClick={() =>
-                            item?.children?.length !== 0
-                              ? handleClick(item)
-                              : handleClick()
-                          }
-                          style={{
-                            background: open === item?.label && "#f6f6f6",
+                      <ListItemButton
+                        className={classes.listItemButton}
+                        onClick={() =>
+                          item?.children?.length !== 0
+                            ? handleClick(item)
+                            : handleClick()
+                        }
+                        style={{
+                          background: open === item?.label && "#f6f6f6",
+                        }}
+                      >
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                            mr: 2,
+                            justifyContent: "center",
                           }}
                         >
-                          <ListItemIcon
-                            sx={{
-                              minWidth: 0,
-                              mr: 2,
-                              justifyContent: "center",
-                            }}
-                          >
-                            <img
-                              style={{ height: "20px", width: "20px" }}
-                              src={
-                                isActive
-                                  ? item?.children?.length
-                                    ? item?.children?.some((nestedItem) =>
-                                        window.location.pathname.includes(
-                                          nestedItem.url
-                                        )
+                          <Image
+                            style={{ height: "20px", width: "20px" }}
+                            src={
+                              isActive(item?.url)
+                                ? item?.children?.length
+                                  ? item?.children?.some((nestedItem) =>
+                                      window.location.pathname.includes(
+                                        nestedItem.url
                                       )
-                                      ? item?.activeIcon
-                                      : item?.icon
-                                    : item?.activeIcon
-                                  : item?.icon
-                              }
-                            />
-                          </ListItemIcon>
-                          <ListItemText primary={item?.label} />
+                                    )
+                                    ? item?.activeIcon
+                                    : item?.icon
+                                  : item?.activeIcon
+                                : item?.icon
+                            }
+                          />
+                        </ListItemIcon>
+                        <ListItemText primary={item?.label} />
 
-                          {item?.children?.length !== 0 && (
-                            <ExpandMore
-                              sx={{
-                                transition: "transform 0.3s",
-                                transform:
-                                  open === item?.label
-                                    ? "rotate(-180deg)"
-                                    : "rotate(0deg)",
-                              }}
-                            />
-                          )}
-                        </ListItemButton>
-                      )}
+                        {item?.children?.length !== 0 && (
+                          <ExpandMore
+                            sx={{
+                              transition: "transform 0.3s",
+                              transform:
+                                open === item?.label
+                                  ? "rotate(-180deg)"
+                                  : "rotate(0deg)",
+                            }}
+                          />
+                        )}
+                      </ListItemButton>
                     </Link>
 
                     <Collapse
@@ -449,6 +455,7 @@ const NavBarByRoleNCC = ({ role_details, user, handleClick, open }) => {
                             child={child}
                             key={index}
                             classes={classes}
+                            isActive={isActive}
                           />
                         ))}
                       </Box>
@@ -467,6 +474,7 @@ const NavBarByRoleSuperadmin = ({
   user,
   handleClick,
   open,
+  isActive,
 }) => {
   const classes = useStyles();
   const { SidebarConstants } = useGetSidebar();
@@ -495,8 +503,8 @@ const NavBarByRoleSuperadmin = ({
                   >
                     <Link
                       href={item?.children?.length ? "" : item?.url}
-                      className={({ isActive }) =>
-                        isActive &&
+                      className={
+                        isActive(item?.url) &&
                         (item?.children?.length
                           ? item?.children?.some((nestedItem) =>
                               window.location.pathname.includes(nestedItem.url)
@@ -506,57 +514,55 @@ const NavBarByRoleSuperadmin = ({
                           : classes.activeClass)
                       }
                     >
-                      {({ isActive }) => (
-                        <ListItemButton
-                          className={classes.listItemButton}
-                          onClick={() =>
-                            item?.children?.length !== 0
-                              ? handleClick(item)
-                              : handleClick()
-                          }
-                          style={{
-                            background: open === item?.label && "#f6f6f6",
+                      <ListItemButton
+                        className={classes.listItemButton}
+                        onClick={() =>
+                          item?.children?.length !== 0
+                            ? handleClick(item)
+                            : handleClick()
+                        }
+                        style={{
+                          background: open === item?.label && "#f6f6f6",
+                        }}
+                      >
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                            mr: 2,
+                            justifyContent: "center",
                           }}
                         >
-                          <ListItemIcon
-                            sx={{
-                              minWidth: 0,
-                              mr: 2,
-                              justifyContent: "center",
-                            }}
-                          >
-                            <img
-                              style={{ height: "20px", width: "20px" }}
-                              src={
-                                isActive
-                                  ? item?.children?.length
-                                    ? item?.children?.some((nestedItem) =>
-                                        window.location.pathname.includes(
-                                          nestedItem.url
-                                        )
+                          <Image
+                            style={{ height: "20px", width: "20px" }}
+                            src={
+                              isActive(item?.url)
+                                ? item?.children?.length
+                                  ? item?.children?.some((nestedItem) =>
+                                      window.location.pathname.includes(
+                                        nestedItem.url
                                       )
-                                      ? item?.activeIcon
-                                      : item?.icon
-                                    : item?.activeIcon
-                                  : item?.icon
-                              }
-                            />
-                          </ListItemIcon>
-                          <ListItemText primary={item?.label} />
+                                    )
+                                    ? item?.activeIcon
+                                    : item?.icon
+                                  : item?.activeIcon
+                                : item?.icon
+                            }
+                          />
+                        </ListItemIcon>
+                        <ListItemText primary={item?.label} />
 
-                          {item?.children?.length !== 0 && (
-                            <ExpandMore
-                              sx={{
-                                transition: "transform 0.3s",
-                                transform:
-                                  open === item?.label
-                                    ? "rotate(-180deg)"
-                                    : "rotate(0deg)",
-                              }}
-                            />
-                          )}
-                        </ListItemButton>
-                      )}
+                        {item?.children?.length !== 0 && (
+                          <ExpandMore
+                            sx={{
+                              transition: "transform 0.3s",
+                              transform:
+                                open === item?.label
+                                  ? "rotate(-180deg)"
+                                  : "rotate(0deg)",
+                            }}
+                          />
+                        )}
+                      </ListItemButton>
                     </Link>
 
                     <Collapse
@@ -571,6 +577,7 @@ const NavBarByRoleSuperadmin = ({
                             key={index}
                             classes={classes}
                             admin_role_details={admin_role_details}
+                            isActive={isActive}
                           />
                         ))}
                       </Box>

@@ -1,16 +1,16 @@
 import CustomTable from "@/components/common/table";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getParticipants, getParticipantsResult } from "../redux/actions";
 const ParticipantResult = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate = useRouter();
+  const location = useRouter();
 
-  const { participant_id } = useParams();
+  const { participant_id } = useRouter()?.query;
   const [page, setPage] = useState();
   const [rowsPerPage, setRowsPerPage] = useState();
   const [name, setName] = useState();
@@ -50,9 +50,7 @@ const ParticipantResult = () => {
 
   useEffect(() => {
     participant_id &&
-      dispatch(
-        getParticipantsResult(location?.state?.state?.slug, participant_id)
-      );
+      dispatch(getParticipantsResult(navigate?.query?.slug, participant_id));
     if (participant_id) {
       const participantName = participants?.data?.find(
         (list) => list?.id == participant_id
@@ -81,7 +79,7 @@ const ParticipantResult = () => {
           <Box display="flex" columnGap={2}>
             <ArrowBackIcon
               style={{ cursor: "pointer", color: "#2196f3" }}
-              onClick={() => navigate(-1)}
+              onClick={() => navigate.back()}
             />
             Participant Survey Result of{" "}
             <Typography color="primary" fontWeight="600">

@@ -9,9 +9,9 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
 import { Box, Button } from "@mui/material";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
 import {
   changeStatus,
   deleteQuestion,
@@ -24,7 +24,7 @@ import { useStyles } from "./styles";
 const Questions = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const location = useLocation();
+  const location = useRouter();
   const [openForm, formOpenFunction] = useToggle(false);
   const [openEdit, editOpenFunction] = useToggle(false);
   const [openDelete, deleteOpenFunction] = useToggle(false);
@@ -32,7 +32,7 @@ const Questions = () => {
   const [detail, setDetail] = useState();
   const [page, setPage] = useState();
   const [rowsPerPage, setRowsPerPage] = useState();
-  const navigate = useNavigate();
+  const navigate = useRouter();
 
   useEffect(() => {
     dispatch(getAllQuestions());
@@ -155,7 +155,7 @@ const Questions = () => {
                 color: "#2196f3",
                 marginBottom: "20px",
               }}
-              onClick={() => navigate(-1)}
+              onClick={() => navigate.back()}
             />
             <Box>Questions</Box>
           </Box>
