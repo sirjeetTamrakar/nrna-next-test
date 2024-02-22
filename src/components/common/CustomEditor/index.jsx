@@ -1,5 +1,3 @@
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { Box, FormHelperText, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
@@ -11,16 +9,32 @@ const CustomEditor = ({ name, emailTemplate }) => {
     control,
     formState: { errors },
   } = useFormContext();
-  const editorRef = useRef(null);
+  const editorRef = useRef();
   const [editorLoaded, setEditorLoaded] = useState(false);
+  const { CKEditor, ClassicEditor } = editorRef.current || {};
 
   useEffect(() => {
-    setEditorLoaded(true);
+    // Dynamically import CKEditor and ClassicEditor
+    const loadEditors = async () => {
+      const { CKEditor: importedCKEditor } = await import(
+        "@ckeditor/ckeditor5-react"
+      );
+      const { default: importedClassicEditor } = await import(
+        "@ckeditor/ckeditor5-build-classic"
+      );
+      editorRef.current = {
+        CKEditor: importedCKEditor,
+        ClassicEditor: importedClassicEditor,
+      };
+      setEditorLoaded(true);
+    };
+
+    loadEditors();
   }, []);
 
   return (
     <>
-      {editorLoaded && (
+      {editorLoaded && CKEditor && ClassicEditor && (
         <Box>
           <Controller
             name={name}
@@ -31,6 +45,9 @@ const CustomEditor = ({ name, emailTemplate }) => {
                   {emailTemplate ? emailTemplate : "Description"}{" "}
                 </Typography>
                 <CKEditor
+                  onReady={(editor) => {
+                    //  editor.ui.view.editable.element.style.height = "200px";
+                  }}
                   editor={ClassicEditor}
                   data={value}
                   onChange={(event, editor) => {
@@ -45,6 +62,7 @@ const CustomEditor = ({ name, emailTemplate }) => {
           />
           {errors?.[name]?.message && (
             <FormHelperText
+              // error={true}
               sx={{ fontSize: "10px", color: "red", marginTop: "5px" }}
             >
               {errors?.[name].message}
