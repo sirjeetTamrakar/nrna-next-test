@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeStatus,
   deleteQuestion,
-  getAllQuestions,
+  getSingleSurvey,
 } from "../redux/actions";
 import Edit from "./Edit";
 import Register from "./Register";
@@ -33,10 +33,15 @@ const Questions = () => {
   const [page, setPage] = useState();
   const [rowsPerPage, setRowsPerPage] = useState();
   const navigate = useRouter();
+  const { single_survey, single_survey_loading } = useSelector(
+    (state) => state.question
+  );
 
+  const survey_id = navigate?.query?.id;
   useEffect(() => {
-    dispatch(getAllQuestions());
-  }, []);
+    // dispatch(getAllQuestions());
+    survey_id && dispatch(getSingleSurvey({ id: survey_id }));
+  }, [survey_id]);
 
   const tableHeads = [
     { title: "S.N.", type: "Index", minWidth: 20 },
@@ -103,14 +108,23 @@ const Questions = () => {
   useEffect(() => {
     if (questions) {
       const newArray = questions?.filter(
-        (item) => Number(item?.survey_id) === location?.state?.id
+        (item) => Number(item?.survey_id) === survey_id
       );
       setSingleSurveyQuestion(newArray);
     }
   }, [questions]);
 
+  const handleSuccess = () => {
+    deleteOpenFunction();
+    survey_id && dispatch(getSingleSurvey({ id: survey_id }));
+  };
+  const handleStatusSuccess = () => {
+    statusOpenFunction();
+    survey_id && dispatch(getSingleSurvey({ id: survey_id }));
+  };
+
   const handleConfirm = (slug) => {
-    dispatch(deleteQuestion(slug, deleteOpenFunction));
+    dispatch(deleteQuestion(slug, handleSuccess));
   };
 
   const handleStatusConfirm = (slug) => {
@@ -119,7 +133,7 @@ const Questions = () => {
       status: detail?.status == "0" ? true : false,
       _method: "PATCH",
     };
-    dispatch(changeStatus(finalData, statusOpenFunction));
+    dispatch(changeStatus(finalData, handleStatusSuccess));
   };
 
   const handleEdit = (row) => {
@@ -170,14 +184,14 @@ const Questions = () => {
         </Box>
         <CollapseTable
           tableHeads={tableHeads}
-          tableData={singleSurveyQuestion}
+          tableData={single_survey}
           rowsPerPage={rowsPerPage}
           setRowsPerPage={setRowsPerPage}
           page={page}
           setPage={setPage}
           total={30}
           ChildComponent={ChildComponent}
-          loading={questions_loading ? true : false}
+          loading={single_survey_loading}
         />
 
         <CustomModal
@@ -188,10 +202,7 @@ const Questions = () => {
           icon={<PsychologyAltIcon />}
           width={`50rem`}
         >
-          <Register
-            handleClose={formOpenFunction}
-            surveyId={location?.state?.id}
-          />
+          <Register handleClose={formOpenFunction} surveyId={survey_id} />
         </CustomModal>
         <CustomModal
           open={openEdit}
@@ -204,7 +215,7 @@ const Questions = () => {
           <Edit
             data={detail}
             handleClose={editOpenFunction}
-            surveyId={location?.state?.id}
+            surveyId={survey_id}
           />
         </CustomModal>
 

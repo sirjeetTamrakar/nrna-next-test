@@ -4,7 +4,7 @@ import CustomFormProvider from "@/components/common/Form/CustomFormProvider";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { createQuestion } from "../redux/actions";
+import { createQuestion, getSingleSurvey } from "../redux/actions";
 import QuestionForm from "./Form";
 import { validationSchema } from "./ValidationSchema";
 import { useStyles } from "./styles";
@@ -14,6 +14,10 @@ const Register = ({ handleClose, surveyId }) => {
   const defaultValues = {};
   const classes = useStyles();
   const { create_question_loading } = useSelector((state) => state.question);
+  const handleSuccess = () => {
+    handleClose();
+    surveyId && dispatch(getSingleSurvey({ id: surveyId }));
+  };
 
   const onSubmit = (data) => {
     const newData = {
@@ -21,7 +25,7 @@ const Register = ({ handleClose, surveyId }) => {
       survey_id: surveyId,
       options: data?.options?.filter((item) => item),
     };
-    dispatch(createQuestion(newData, handleClose));
+    dispatch(createQuestion(newData, handleSuccess));
   };
 
   return (

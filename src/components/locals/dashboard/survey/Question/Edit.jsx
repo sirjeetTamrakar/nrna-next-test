@@ -4,7 +4,7 @@ import CustomFormProvider from "@/components/common/Form/CustomFormProvider";
 import useYupValidationResolver from "@/hooks/useYupValidationResolver";
 import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { updateQuestion } from "../redux/actions";
+import { getSingleSurvey, updateQuestion } from "../redux/actions";
 import QuestionForm from "./Form";
 import { validationSchema } from "./ValidationSchema";
 import { useStyles } from "./styles";
@@ -13,6 +13,10 @@ const EditForm = ({ handleClose, id, surveyId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const { update_question_loading } = useSelector((state) => state.question);
+  const handleSuccess = () => {
+    handleClose();
+    surveyId && dispatch(getSingleSurvey({ id: surveyId }));
+  };
 
   const onSubmit = (data) => {
     const newData = {
@@ -21,7 +25,7 @@ const EditForm = ({ handleClose, id, surveyId }) => {
       options: data?.options?.filter((item) => item),
     };
 
-    dispatch(updateQuestion(id, newData, handleClose));
+    dispatch(updateQuestion(id, newData, handleSuccess));
   };
 
   return (

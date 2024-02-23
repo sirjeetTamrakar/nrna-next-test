@@ -17,6 +17,7 @@ const Results = () => {
   const [singleSurveyQuestion, setSingleSurveyQuestion] = useState([]);
   const location = useRouter();
   const navigate = useRouter();
+  console.log({ aaaaaaaaaaaaaa: location?.query });
 
   const tableHeads = [
     { title: "S.N.", type: "Index", minWidth: 20 },
@@ -43,7 +44,7 @@ const Results = () => {
   useEffect(() => {
     if (result) {
       const newArray = result?.filter(
-        (item) => Number(item?.survey_id) === location?.state?.id
+        (item) => Number(item?.survey_id) === Number(location?.query?.id)
       );
       setSingleSurveyQuestion(newArray);
     }

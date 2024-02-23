@@ -1,6 +1,6 @@
-import { MoreVertOutlined } from '@mui/icons-material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { MoreVertOutlined } from "@mui/icons-material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import {
   Box,
   Checkbox,
@@ -16,15 +16,15 @@ import {
   TableContainer,
   TableHead,
   TablePagination,
-  TableRow
-} from '@mui/material';
-import PropTypes from 'prop-types';
-import { useState } from 'react';
+  TableRow,
+} from "@mui/material";
+import PropTypes from "prop-types";
+import { useState } from "react";
 // MAIN Component
 const CollapseTable = ({
   isMulti = true,
   tableHeads,
-  tableData,
+  tableData = [],
   onEdit,
   ChildComponent,
   onDelete,
@@ -33,7 +33,7 @@ const CollapseTable = ({
   setRowsPerPage,
   page = 0,
   setPage,
-  total = 1
+  total = 1,
 }) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -68,7 +68,7 @@ const CollapseTable = ({
     if (!e.target.checked) return setSelectedRows([]);
     const newDatas = tableData.map((singleData, idx) => ({
       ...singleData,
-      id: idx
+      id: idx,
     }));
     setSelectedRows(newDatas);
   };
@@ -97,19 +97,23 @@ const CollapseTable = ({
               <TableCell padding="checkbox">
                 <Checkbox
                   onChange={(e) => onSelectAllClick(e, tableData)}
-                  inputProps={{ 'aria-label': 'select all desserts' }}
+                  inputProps={{ "aria-label": "select all desserts" }}
                 />
               </TableCell>
             )}
             {tableHeads?.map((element, idx) => {
-              return <TableCell key={idx}>{`${element.title}`.toUpperCase()}</TableCell>;
+              return (
+                <TableCell key={idx}>
+                  {`${element.title}`.toUpperCase()}
+                </TableCell>
+              );
             })}
           </TableRow>
         </TableHead>
 
         <TableBody>
           {!loading
-            ? tableData.map((singleData, index) => {
+            ? tableData?.map((singleData, index) => {
                 return (
                   <Rows
                     key={index}
@@ -130,7 +134,11 @@ const CollapseTable = ({
                     <Skeleton height={30} />
                   </TableCell>
                   {tableHeads?.map((item, list) => (
-                    <TableCell key={list} sx={{ minWidth: item?.minWidth }} align={item?.align}>
+                    <TableCell
+                      key={list}
+                      sx={{ minWidth: item?.minWidth }}
+                      align={item?.align}
+                    >
                       <Skeleton height={30} />
                     </TableCell>
                   ))}
@@ -154,8 +162,9 @@ const CollapseTable = ({
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button'
-        }}>
+          "aria-labelledby": "basic-button",
+        }}
+      >
         <MenuItem onClick={handleEditClicked}>Edit</MenuItem>
         <MenuItem onClick={handleDeleteClicked}>Delete</MenuItem>
       </Menu>
@@ -171,29 +180,29 @@ CollapseTable.propTypes = {
   tableData: PropTypes.array,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
-  childHeads: PropTypes.component
+  childHeads: PropTypes.component,
 };
 CollapseTable.defaultProps = {
   isMulti: false,
   onEdit: () => {},
   tableHeads: [
-    { title: '#', type: 'Index', isSortable: true },
-    { title: 'Name', field: 'name' },
-    { title: 'LastName', field: 'lname' },
-    { title: 'Actions', type: 'actions' }
+    { title: "#", type: "Index", isSortable: true },
+    { title: "Name", field: "name" },
+    { title: "LastName", field: "lname" },
+    { title: "Actions", type: "actions" },
   ],
   tableData: [
-    { name: 'ariana', lname: 'grande' },
-    { name: 'jamie', lname: 'laninster' },
+    { name: "ariana", lname: "grande" },
+    { name: "jamie", lname: "laninster" },
     {
-      name: 'romeo',
+      name: "romeo",
       lname: () => {
         let a = 3;
         if (a === 3) return 3;
-        return 'hell';
-      }
-    }
-  ]
+        return "hell";
+      },
+    },
+  ],
 };
 
 const Rows = ({
@@ -204,7 +213,7 @@ const Rows = ({
   singleData,
   tableHeads,
   handleActionButtonClick,
-  ChildComponent
+  ChildComponent,
 }) => {
   const [openCollapse, setOpenCollapse] = useState(false);
 
@@ -215,7 +224,8 @@ const Rows = ({
           <IconButton
             aria-label="expand row"
             size="small"
-            onClick={() => setOpenCollapse(!openCollapse)}>
+            onClick={() => setOpenCollapse(!openCollapse)}
+          >
             {openCollapse ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
@@ -225,25 +235,31 @@ const Rows = ({
               //   indeterminate={numSelected > 0 && numSelected < rowCount}
               checked={checkChecked(index)}
               onChange={() => handleSingleRowSelect(singleData, index)}
-              inputProps={{ 'aria-label': 'select all desserts' }}
+              inputProps={{ "aria-label": "select all desserts" }}
             />
           </TableCell>
         )}
         {tableHeads.map((el, idx) => {
           //checking on  type of table data
           // 1) if type is index automatically populate the tablecell with number data
-          if (el.type?.toLowerCase() === 'index') {
+          if (el.type?.toLowerCase() === "index") {
             return <TableCell key={idx}>{index + 1}</TableCell>;
           }
 
-          if (typeof el.field === 'function') {
-            return <TableCell key={idx}>{el.field(singleData, el.field)}</TableCell>;
+          if (typeof el.field === "function") {
+            return (
+              <TableCell key={idx}>{el.field(singleData, el.field)}</TableCell>
+            );
           }
           // if type is action then render the vertical item
-          if (el.type?.toLowerCase() === 'actions') {
+          if (el.type?.toLowerCase() === "actions") {
             return (
               <TableCell key={idx}>
-                <IconButton onClick={(event) => handleActionButtonClick(event, singleData)}>
+                <IconButton
+                  onClick={(event) =>
+                    handleActionButtonClick(event, singleData)
+                  }
+                >
                   <MoreVertOutlined />
                 </IconButton>
               </TableCell>
@@ -252,7 +268,7 @@ const Rows = ({
           return <TableCell key={idx}>{singleData[el.field]}</TableCell>;
         })}
       </TableRow>
-      <TableRow key={index + 'a'}>
+      <TableRow key={index + "a"}>
         <TableCell colSpan={tableHeads?.length + 1} style={{ padding: 0 }}>
           <Collapse in={openCollapse} timeout="auto" unmountOnExit>
             <Box>

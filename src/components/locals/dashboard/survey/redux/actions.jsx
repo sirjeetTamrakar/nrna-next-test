@@ -9,6 +9,7 @@ import {
   getAllSurveyApi,
   getParticipantResultApi,
   getParticipantsApi,
+  getSingleSurveyApi,
   getSurveyResultApi,
   postQuestionCheckFrontApi,
   postQuestionFrontApi,
@@ -42,7 +43,7 @@ export const createQuestion = (data, handleSuccess) => (dispatch) => {
       dispatch({ type: actions.CREATE_QUESTION_SUCCESS });
       successToast("Question created successfully");
       handleSuccess && handleSuccess();
-      dispatch(getAllQuestions());
+      // dispatch(getAllQuestions());
     })
     .catch((error) => {
       errorToast(error);
@@ -58,7 +59,7 @@ export const updateQuestion = (id, data, handleSuccess) => (dispatch) => {
       successToast("Question updated successfully");
 
       handleSuccess && handleSuccess();
-      dispatch(getAllQuestions());
+      // dispatch(getAllQuestions());
     })
     .catch((error) => {
       errorToast(error);
@@ -72,7 +73,7 @@ export const changeStatus = (data, handleSuccess) => (dispatch) => {
     .then((res) => {
       dispatch({ type: actions.CHANGE_QUESTION_STATUS_SUCCESS });
       handleSuccess && handleSuccess();
-      dispatch(getAllQuestions());
+      // dispatch(getAllQuestions());
       successToast("Status has been changed");
     })
     .catch((error) => {
@@ -89,7 +90,7 @@ export const deleteQuestion = (id, handleSuccess) => (dispatch) => {
       successToast("Question deleted successfully");
 
       handleSuccess && handleSuccess();
-      dispatch(getAllQuestions());
+      // dispatch(getAllQuestions());
     })
     .catch((error) => {
       errorToast(error);
@@ -181,6 +182,21 @@ export const getAllSurvey = (data) => (dispatch) => {
     .catch((error) => {
       errorToast(error);
       dispatch({ type: actions.FETCH_SURVEY_ERROR });
+    });
+};
+export const getSingleSurvey = (data) => (dispatch) => {
+  dispatch({ type: actions.FETCH_SINGLE_SURVEY_BEGIN });
+
+  getSingleSurveyApi(data)
+    .then((res) => {
+      dispatch({
+        type: actions.FETCH_SINGLE_SURVEY_SUCCESS,
+        payload: res.data.data,
+      });
+    })
+    .catch((error) => {
+      errorToast(error);
+      dispatch({ type: actions.FETCH_SINGLE_SURVEY_ERROR });
     });
 };
 

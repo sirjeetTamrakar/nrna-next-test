@@ -60,6 +60,9 @@ export const getAllSurveyApi = (data) => {
     : "";
   return axiosInstance().get(`/admin/surveys${page}${pagination_limit}`);
 };
+export const getSingleSurveyApi = (data) => {
+  return axiosInstance().get(`/admin/survey-question-answer/${data?.id}`);
+};
 
 // create question
 export const createSurveyApi = (data) => {

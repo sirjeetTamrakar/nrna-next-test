@@ -1,4 +1,4 @@
-import * as actions from './types';
+import * as actions from "./types";
 const defaultState = {
   questions: [],
   questions_loading: false,
@@ -16,10 +16,12 @@ const defaultState = {
   participant_result_loading: false,
   survey: [],
   survey_loading: false,
+  single_survey: [],
+  single_survey_loading: false,
   create_survey_loading: false,
   update_survey_loading: false,
   delete_survey_loading: false,
-  survey_status_loading: false
+  survey_status_loading: false,
 };
 
 const questionReducer = (state = defaultState, action) => {
@@ -27,7 +29,7 @@ const questionReducer = (state = defaultState, action) => {
     case actions.FETCH_QUESTIONS_BEGIN:
       return {
         ...state,
-        questions_loading: true
+        questions_loading: true,
       };
 
     case actions.FETCH_QUESTIONS_SUCCESS:
@@ -39,7 +41,7 @@ const questionReducer = (state = defaultState, action) => {
     case actions.CREATE_QUESTION_BEGIN:
       return {
         ...state,
-        create_question_loading: true
+        create_question_loading: true,
       };
 
     case actions.CREATE_QUESTION_SUCCESS:
@@ -49,7 +51,7 @@ const questionReducer = (state = defaultState, action) => {
     case actions.UPDATE_QUESTION_BEGIN:
       return {
         ...state,
-        update_question_loading: true
+        update_question_loading: true,
       };
 
     case actions.UPDATE_QUESTION_SUCCESS:
@@ -59,7 +61,7 @@ const questionReducer = (state = defaultState, action) => {
     case actions.DELETE_QUESTION_BEGIN:
       return {
         ...state,
-        delete_question_loading: true
+        delete_question_loading: true,
       };
 
     case actions.DELETE_QUESTION_SUCCESS:
@@ -69,7 +71,7 @@ const questionReducer = (state = defaultState, action) => {
     case actions.CHANGE_QUESTION_STATUS_BEGIN:
       return {
         ...state,
-        question_status_loading: true
+        question_status_loading: true,
       };
 
     case actions.CHANGE_QUESTION_STATUS_SUCCESS:
@@ -80,7 +82,7 @@ const questionReducer = (state = defaultState, action) => {
     case actions.POST_QUESTION_FRONT_BEGIN:
       return {
         ...state,
-        post_question_front_loading: true
+        post_question_front_loading: true,
       };
 
     case actions.POST_QUESTION_FRONT_SUCCESS:
@@ -90,83 +92,83 @@ const questionReducer = (state = defaultState, action) => {
     case actions.POST_QUESTION_CHECK_FRONT_BEGIN:
       return {
         ...state,
-        post_question_check_front_loading: true
+        post_question_check_front_loading: true,
       };
 
     case actions.POST_QUESTION_CHECK_FRONT_SUCCESS:
       return {
         ...state,
-        post_question_check_front_loading: false
+        post_question_check_front_loading: false,
       };
 
     case actions.POST_QUESTION_CHECK_FRONT_ERROR:
       return {
         ...state,
-        post_question_check_front_loading: false
+        post_question_check_front_loading: false,
       };
 
     case actions.FETCH_SURVEY_RESULT_BEGIN:
       return {
         ...state,
-        result_loading: true
+        result_loading: true,
       };
 
     case actions.FETCH_SURVEY_RESULT_SUCCESS:
       return {
         ...state,
         result_loading: false,
-        result: action.payload
+        result: action.payload,
       };
 
     case actions.FETCH_SURVEY_RESULT_ERROR:
       return {
         ...state,
-        result_loading: false
+        result_loading: false,
       };
 
     case actions.FETCH_PARTICIPANT_BEGIN:
       return {
         ...state,
-        participants_loading: true
+        participants_loading: true,
       };
 
     case actions.FETCH_PARTICIPANT_SUCCESS:
       return {
         ...state,
         participants_loading: false,
-        participants: action.payload
+        participants: action.payload,
       };
 
     case actions.FETCH_PARTICIPANT_ERROR:
       return {
         ...state,
-        participants_loading: false
+        participants_loading: false,
       };
 
     case actions.FETCH_PARTICIPANT_RESULT_BEGIN:
       return {
         ...state,
-        participant_result_loading: true
+        participant_result_loading: true,
       };
 
     case actions.FETCH_PARTICIPANT_RESULT_SUCCESS:
       return {
         ...state,
         participant_result_loading: false,
-        participant_result: action.payload
+        participant_result: action.payload,
       };
 
     case actions.FETCH_PARTICIPANT_RESULT_ERROR:
       return {
         ...state,
-        participant_result_loading: false
+        participant_result_loading: false,
       };
 
     // survey
     case actions.FETCH_SURVEY_BEGIN:
       return {
         ...state,
-        survey_loading: true
+        survey_loading: true,
       };
 
     case actions.FETCH_SURVEY_SUCCESS:
@@ -174,11 +176,26 @@ const questionReducer = (state = defaultState, action) => {
 
     case actions.FETCH_SURVEY_ERROR:
       return { ...state, survey_loading: false };
+    case actions.FETCH_SINGLE_SURVEY_BEGIN:
+      return {
+        ...state,
+        single_survey_loading: true,
+      };
+
+    case actions.FETCH_SINGLE_SURVEY_SUCCESS:
+      return {
+        ...state,
+        single_survey_loading: false,
+        single_survey: action.payload,
+      };
+
+    case actions.FETCH_SINGLE_SURVEY_ERROR:
+      return { ...state, single_survey_loading: false };
 
     case actions.CREATE_SURVEY_BEGIN:
       return {
         ...state,
-        create_survey_loading: true
+        create_survey_loading: true,
       };
 
     case actions.CREATE_SURVEY_SUCCESS:
@@ -188,7 +205,7 @@ const questionReducer = (state = defaultState, action) => {
     case actions.UPDATE_SURVEY_BEGIN:
       return {
         ...state,
-        update_survey_loading: true
+        update_survey_loading: true,
       };
 
     case actions.UPDATE_SURVEY_SUCCESS:
@@ -198,7 +215,7 @@ const questionReducer = (state = defaultState, action) => {
     case actions.DELETE_SURVEY_BEGIN:
       return {
         ...state,
-        delete_survey_loading: true
+        delete_survey_loading: true,
       };
 
     case actions.DELETE_SURVEY_SUCCESS:
@@ -208,7 +225,7 @@ const questionReducer = (state = defaultState, action) => {
     case actions.CHANGE_SURVEY_STATUS_BEGIN:
       return {
         ...state,
-        survey_status_loading: true
+        survey_status_loading: true,
       };
 
     case actions.CHANGE_SURVEY_STATUS_SUCCESS:

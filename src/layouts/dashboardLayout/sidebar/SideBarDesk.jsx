@@ -77,7 +77,13 @@ export default function SidebarDesk() {
   const { user, role_details, admin_role_details } = useSelector(
     (state) => state.auth
   );
-  const isActive = (href) => pathname?.includes(href);
+  const isActive = (href) => {
+    return pathname?.includes(href);
+    // const path = pathname?.split("/")?.slice(2)?.join("/");
+    // const link = href?.split("/")?.slice(2)?.join("/");
+    // console.log({ path, link });
+    // return pathname === "/dashboard" ? true : path ===(link);
+  };
 
   // --------------------
 

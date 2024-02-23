@@ -183,7 +183,7 @@ const SurveyList = () => {
 
   const handleShowQuestions = (row) => {
     setDetail(row);
-    navigate.push(`/dashboard/survey/survey-list/questions`);
+    navigate.push(`/dashboard/survey/survey-list/questions?id=${row?.id}`);
     // openQuestionsFunction();
   };
 

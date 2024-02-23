@@ -195,7 +195,7 @@ const SurveyListResult = () => {
 
   const handleShowQuestions = (row) => {
     setDetail(row);
-    navigate.push(`/dashboard/survey/result/result-list?slug=${row?.slug}`);
+    navigate.push(`/dashboard/survey/result/result-list?id=${row?.id}`);
   };
 
   const handleShowParticipants = (row) => {
