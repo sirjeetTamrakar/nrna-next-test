@@ -21,17 +21,17 @@ const index = ({ single_business = {} }) => {
   const dispatch = useDispatch();
   const [filteredSingleBusiness, setFilteredSingleBusiness] = useState();
   const { business_category } = useSelector((state) => state.homepage);
-  useEffect(() => {
-    const filteredSingleCategoryData = business_category?.filter(
-      (item) => item?.id === Number(single_business?.business_category_id)
-    );
-    const newObj = {};
+  // useEffect(() => {
+  //   const filteredSingleCategoryData = business_category?.filter(
+  //     (item) => item?.id === Number(single_business?.business_category_id)
+  //   );
+  //   const newObj = {};
 
-    filteredSingleCategoryData.forEach((item, index) => {
-      newObj[`category${index + 1}`] = item;
-    });
-    setFilteredSingleBusiness(newObj);
-  }, [business_category]);
+  //   filteredSingleCategoryData.forEach((item, index) => {
+  //     newObj[`category${index + 1}`] = item;
+  //   });
+  //   setFilteredSingleBusiness(newObj);
+  // }, [business_category]);
 
   // useEffect(() => {
   //   slug && dispatch(getSingleBusiness(slug));
