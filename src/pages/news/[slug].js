@@ -1,4 +1,5 @@
 import SecondaryNav from "@/components/locals/News/SecondaryNav";
+import { LIVE_BASE_URL } from "@/helpers";
 import { getAllNews, getNewsCategory } from "@/redux/homepage/actions";
 import { changeDateFormat } from "@/utils/dateUtils";
 import { Facebook, Twitter, WhatsApp } from "@mui/icons-material";
@@ -200,7 +201,7 @@ const SingleNews = ({ single_news = {} }) => {
 export default SingleNews;
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`https://api.nrnaglobal.com/api/news/${params?.slug}`)
+  const res = await fetch(`${LIVE_BASE_URL}/api/news/${params?.slug}`)
     .then((response) => response.json())
     .then((json) => json);
 
@@ -208,18 +209,13 @@ export async function getStaticProps({ params }) {
     props: {
       single_news: res?.data,
     },
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-    // - At most once every 10 seconds
-    revalidate: 10, // In seconds
+
+    revalidate: 10,
   };
 }
 
-// This function gets called at build time on server-side.
-// It may be called again, on a serverless function, if
-// the path has not been generated.
 export async function getStaticPaths() {
-  const res = await fetch("https://api.nrnaglobal.com/api/news")
+  const res = await fetch(`${LIVE_BASE_URL}/api/news`)
     .then((response) => response.json())
     .then((json) => json);
 

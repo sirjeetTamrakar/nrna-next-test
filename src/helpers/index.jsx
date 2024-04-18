@@ -1,5 +1,5 @@
 import { customToaster } from "@/utils/toast";
-
+export const LIVE_BASE_URL = "https://nbns-api.nbnsglobal.com";
 export const getError = (error) => {
   let err;
   if (error?.response?.data?.errors) {

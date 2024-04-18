@@ -218,16 +218,11 @@ export async function getStaticProps({ params }) {
     props: {
       abc: ["disijdsijdsidsj"],
     },
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-    // - At most once every 10 seconds
-    revalidate: 10, // In seconds
+
+    revalidate: 10,
   };
 }
 
-// This function gets called at build time on server-side.
-// It may be called again, on a serverless function, if
-// the path has not been generated.
 export async function getStaticPaths() {
   console.log({ helllo: "hekkkkkkkkk" });
   const res = await getAllNewsApi();
