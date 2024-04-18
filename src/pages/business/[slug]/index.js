@@ -55,7 +55,7 @@ const index = ({ single_business = {} }) => {
     <>
       <Head>
         <meta name="og:description" content={single_business?.email} />
-        <meta property="og:image" content={single_business?.image} />
+        <meta property="og:image" content={single_business?.banner_image} />
         <meta property="og:title" content={single_business?.fullname} />
 
         <meta
@@ -66,11 +66,11 @@ const index = ({ single_business = {} }) => {
         <title>{single_business?.fullname}</title>
         <meta name="description" content={single_business?.email} />
 
-        <meta property="author" content={single_business?.email} />
+        <meta property="author" content={single_business?.author} />
         <meta name="twitter:card" content={"summary_large_image"} />
         <meta name="twitter:title" content={single_business?.fullname} />
         <meta name="twitter:description" content={single_business?.email} />
-        <meta name="twitter:image" content={single_business?.image} />
+        <meta name="twitter:image" content={single_business?.banner_image} />
         <meta
           name="twitter:url"
           content={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
@@ -117,7 +117,7 @@ const index = ({ single_business = {} }) => {
                       {single_business?.fullname}
                     </div>
                     <div className="candidate_designation">
-                      {filteredSingleBusiness?.category1?.title}
+                      {filteredSingleBusiness?.category1?.fullname}
                       <Box
                         sx={{
                           display: "flex",
@@ -296,7 +296,7 @@ const index = ({ single_business = {} }) => {
                       padding: "20px",
                     }}
                   >
-                    <About data={single_business?.email} />
+                    <About data={single_business?.description} />
                   </Box>
                 </Grid>
               </Grid>
