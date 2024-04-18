@@ -54,8 +54,8 @@ const index = ({ single_business = {} }) => {
   return (
     <>
       <Head>
-        <meta name="og:description" content={single_business?.description} />
-        <meta property="og:image" content={single_business?.banner_image} />
+        <meta name="og:description" content={single_business?.email} />
+        <meta property="og:image" content={single_business?.image} />
         <meta property="og:title" content={single_business?.fullname} />
 
         <meta
@@ -64,16 +64,13 @@ const index = ({ single_business = {} }) => {
         />
         <meta property="og:type" content="article" />
         <title>{single_business?.fullname}</title>
-        <meta name="description" content={single_business?.description} />
+        <meta name="description" content={single_business?.email} />
 
         <meta property="author" content={single_business?.email} />
         <meta name="twitter:card" content={"summary_large_image"} />
         <meta name="twitter:title" content={single_business?.fullname} />
-        <meta
-          name="twitter:description"
-          content={single_business?.description}
-        />
-        <meta name="twitter:image" content={single_business?.banner_image} />
+        <meta name="twitter:description" content={single_business?.email} />
+        <meta name="twitter:image" content={single_business?.image} />
         <meta
           name="twitter:url"
           content={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
@@ -84,13 +81,13 @@ const index = ({ single_business = {} }) => {
           className="candidate_page_banner"
           style={{
             // backgroundImage: `url('${candidateImages?.profileBannerImage}')`,
-            backgroundImage: `url('${single_business?.banner_image}')`,
+            backgroundImage: `url('${single_business?.image}')`,
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
         ></div>
         {/* <BannerBusinessSection
-        banners={single_business?.banner_image}
+        banners={single_business?.image}
         data={single_business}
         singleBanner
       /> */}
@@ -299,7 +296,7 @@ const index = ({ single_business = {} }) => {
                       padding: "20px",
                     }}
                   >
-                    <About data={single_business?.description} />
+                    <About data={single_business?.email} />
                   </Box>
                 </Grid>
               </Grid>
