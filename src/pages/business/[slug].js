@@ -68,33 +68,33 @@ const index = ({ single_business = {} }) => {
           content={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
         />
       </Head>
-      <div className="main_content">
-        <div
-          className="candidate_page_banner"
-          style={{
-            // backgroundImage: `url('${candidateImages?.profileBannerImage}')`,
-            backgroundImage: `url('${single_business?.image}')`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-          }}
-        ></div>
-        {/* <BannerBusinessSection
+      {single_business_loading ? (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          sx={{ height: "60vh" }}
+        >
+          <CircularProgress size={30} />
+        </Box>
+      ) : (
+        <div className="main_content">
+          <div
+            className="candidate_page_banner"
+            style={{
+              // backgroundImage: `url('${candidateImages?.profileBannerImage}')`,
+              backgroundImage: `url('${single_business?.image}')`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+          ></div>
+          {/* <BannerBusinessSection
         banners={single_business?.image}
         data={single_business}
         singleBanner
       /> */}
 
-        <div className="container">
-          {single_business_loading ? (
-            <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              sx={{ height: "60vh" }}
-            >
-              <CircularProgress size={30} />
-            </Box>
-          ) : (
+          <div className="container">
             <div className="candidate_page">
               <div className="candidate_page_lower_banner">
                 <div className={`${"candidate_page_lower_banner_wrapper"}`}>
@@ -286,9 +286,9 @@ const index = ({ single_business = {} }) => {
                 </Grid>
               </div>
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
