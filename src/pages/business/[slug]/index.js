@@ -76,205 +76,204 @@ const index = ({ single_business = {} }) => {
           name="twitter:url"
           content={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
         />
-      </Head>
-      <div className="main_content">
-        <div
-          className="candidate_page_banner"
-          style={{
-            // backgroundImage: `url('${candidateImages?.profileBannerImage}')`,
-            backgroundImage: `url('${single_business?.banner_image}')`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-          }}
-        ></div>
-        {/* <BannerBusinessSection
+        <div className="main_content">
+          <div
+            className="candidate_page_banner"
+            style={{
+              // backgroundImage: `url('${candidateImages?.profileBannerImage}')`,
+              backgroundImage: `url('${single_business?.banner_image}')`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+          ></div>
+          {/* <BannerBusinessSection
         banners={single_business?.banner_image}
         data={single_business}
         singleBanner
       /> */}
 
-        <div className="container">
-          <div className="candidate_page">
-            <div className="candidate_page_lower_banner">
-              <div
-                className={`${
-                  screenSize?.width < 993
-                    ? "business_page_lower_banner_wrapper"
-                    : "candidate_page_lower_banner_wrapper"
-                }`}
-              >
-                <div className="candidate_page_lower_banner_wrapper_box">
-                  <div className="img_container">
-                    <img src={single_business?.image} alt="" />
-                  </div>
-                  <div
-                    className={`${
-                      screenSize?.width < 993
-                        ? "business_name_box"
-                        : "candidate_name_box"
-                    }`}
-                  >
-                    <div className="candidate_name">
-                      {single_business?.fullname}
-                    </div>
-                    <div className="candidate_designation">
-                      {filteredSingleBusiness?.category1?.title}
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          marginTop: "20px",
-                        }}
-                      >
-                        <Box sx={{ color: "gray", fontSize: "12px" }} mb={1}>
-                          Share Profile
-                        </Box>
-                        <Box sx={{ display: "flex", gap: "15px" }}>
-                          <FacebookShareButton
-                            appId="393640856408187"
-                            url={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
-                          >
-                            <Facebook
-                              sx={{ color: "#0866FF", fontSize: "20px" }}
-                            />
-                          </FacebookShareButton>
-                          <TwitterShareButton
-                            url={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
-                          >
-                            <Twitter
-                              sx={{ color: "#1BC4F7", fontSize: "20px" }}
-                            />
-                          </TwitterShareButton>
-                          <WhatsappShareButton
-                            url={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
-                          >
-                            <WhatsApp
-                              sx={{ color: "#24CC63", fontSize: "20px" }}
-                            />
-                          </WhatsappShareButton>
-                        </Box>
-                      </Box>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="candidate_social">
+          <div className="container">
+            <div className="candidate_page">
+              <div className="candidate_page_lower_banner">
                 <div
                   className={`${
                     screenSize?.width < 993
-                      ? "business_social_wrapper_box"
-                      : "candidate_social_wrapper_box"
+                      ? "business_page_lower_banner_wrapper"
+                      : "candidate_page_lower_banner_wrapper"
                   }`}
                 >
-                  <div className="candidate_social_wrapper">
-                    <a
-                      href={single_business?.facebook_url}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <div className="candidate_social_icons_box">
-                        <Image
-                          src={facebook}
-                          alt=""
-                          className="candidate_social_icons"
-                        />
-                      </div>
-                    </a>
-                    <div className="candidate_social_icons_box">
-                      <a
-                        href={single_business?.instagram_url}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <Image
-                          src={insta}
-                          alt=""
-                          className="candidate_social_icons"
-                        />
-                      </a>
+                  <div className="candidate_page_lower_banner_wrapper_box">
+                    <div className="img_container">
+                      <img src={single_business?.image} alt="" />
                     </div>
-                    <div className="candidate_social_icons_box">
+                    <div
+                      className={`${
+                        screenSize?.width < 993
+                          ? "business_name_box"
+                          : "candidate_name_box"
+                      }`}
+                    >
+                      <div className="candidate_name">
+                        {single_business?.fullname}
+                      </div>
+                      <div className="candidate_designation">
+                        {filteredSingleBusiness?.category1?.title}
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            marginTop: "20px",
+                          }}
+                        >
+                          <Box sx={{ color: "gray", fontSize: "12px" }} mb={1}>
+                            Share Profile
+                          </Box>
+                          <Box sx={{ display: "flex", gap: "15px" }}>
+                            <FacebookShareButton
+                              appId="393640856408187"
+                              url={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
+                            >
+                              <Facebook
+                                sx={{ color: "#0866FF", fontSize: "20px" }}
+                              />
+                            </FacebookShareButton>
+                            <TwitterShareButton
+                              url={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
+                            >
+                              <Twitter
+                                sx={{ color: "#1BC4F7", fontSize: "20px" }}
+                              />
+                            </TwitterShareButton>
+                            <WhatsappShareButton
+                              url={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
+                            >
+                              <WhatsApp
+                                sx={{ color: "#24CC63", fontSize: "20px" }}
+                              />
+                            </WhatsappShareButton>
+                          </Box>
+                        </Box>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="candidate_social">
+                  <div
+                    className={`${
+                      screenSize?.width < 993
+                        ? "business_social_wrapper_box"
+                        : "candidate_social_wrapper_box"
+                    }`}
+                  >
+                    <div className="candidate_social_wrapper">
                       <a
-                        href={single_business?.twitter_url}
+                        href={single_business?.facebook_url}
                         target="_blank"
                         rel="noreferrer"
                       >
-                        <Image
-                          src={linkedin}
-                          alt=""
-                          className="candidate_social_icons"
-                        />
+                        <div className="candidate_social_icons_box">
+                          <Image
+                            src={facebook}
+                            alt=""
+                            className="candidate_social_icons"
+                          />
+                        </div>
                       </a>
+                      <div className="candidate_social_icons_box">
+                        <a
+                          href={single_business?.instagram_url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <Image
+                            src={insta}
+                            alt=""
+                            className="candidate_social_icons"
+                          />
+                        </a>
+                      </div>
+                      <div className="candidate_social_icons_box">
+                        <a
+                          href={single_business?.twitter_url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <Image
+                            src={linkedin}
+                            alt=""
+                            className="candidate_social_icons"
+                          />
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div>
-              <hr className="business_horizontaline" />
-            </div>
-            <div className="candidate_page_wrapper">
-              <Grid container spacimg={2}>
-                <Grid item className="col-md-5" sx={{ width: "100%" }}>
-                  <div className="candidate_page_sidebar">
-                    <ul className="contact_list">
-                      <li className="contact_list_title_box">
-                        {" "}
-                        <PermContactCalendarIcon />
-                        <span className="contact_list_title">
-                          Contact Details
-                        </span>
-                      </li>
-                      <li>
-                        <div className="contact_list_subtitle">
-                          Email Address
-                        </div>
-                        <span className="contact_list_item">
-                          {single_business?.email ?? ""}
-                        </span>
-                      </li>
-                      <li>
-                        <div className="contact_list_subtitle">Phone no.</div>
-                        <span className="contact_list_item">
-                          {single_business?.phone ?? ""}
-                        </span>
-                      </li>
-                      <li>
-                        <div className="contact_list_subtitle">Address</div>
-                        <span className="contact_list_item">
-                          {single_business?.address ?? ""}
-                        </span>
-                      </li>
-                      <li>
-                        <div className="contact_list_subtitle">Map</div>
-                        <div
-                          style={{
-                            marginTop: "10px",
-                            width: "100%",
-                            height: "300px",
-                          }}
-                        >
+              <div>
+                <hr className="business_horizontaline" />
+              </div>
+              <div className="candidate_page_wrapper">
+                <Grid container spacimg={2}>
+                  <Grid item className="col-md-5" sx={{ width: "100%" }}>
+                    <div className="candidate_page_sidebar">
+                      <ul className="contact_list">
+                        <li className="contact_list_title_box">
+                          {" "}
+                          <PermContactCalendarIcon />
+                          <span className="contact_list_title">
+                            Contact Details
+                          </span>
+                        </li>
+                        <li>
+                          <div className="contact_list_subtitle">
+                            Email Address
+                          </div>
+                          <span className="contact_list_item">
+                            {single_business?.email ?? ""}
+                          </span>
+                        </li>
+                        <li>
+                          <div className="contact_list_subtitle">Phone no.</div>
+                          <span className="contact_list_item">
+                            {single_business?.phone ?? ""}
+                          </span>
+                        </li>
+                        <li>
+                          <div className="contact_list_subtitle">Address</div>
+                          <span className="contact_list_item">
+                            {single_business?.address ?? ""}
+                          </span>
+                        </li>
+                        <li>
+                          <div className="contact_list_subtitle">Map</div>
                           <div
                             style={{
+                              marginTop: "10px",
                               width: "100%",
-                              height: "100%",
-                              overflow: "hidden",
+                              height: "300px",
                             }}
-                            dangerouslySetInnerHTML={{
-                              __html: single_business?.google_map_link,
-                            }}
-                          />
-                        </div>
-                        {/* <span className="contact_list_item">{candidateData?.address ?? ''}</span> */}
-                        {/* <iframe
+                          >
+                            <div
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                overflow: "hidden",
+                              }}
+                              dangerouslySetInnerHTML={{
+                                __html: single_business?.google_map_link,
+                              }}
+                            />
+                          </div>
+                          {/* <span className="contact_list_item">{candidateData?.address ?? ''}</span> */}
+                          {/* <iframe
                           width="100%"
                           height="220"
                           frameBorder="0"
                           allowFullScreen
                           src={single_business?.google_map_link}></iframe> */}
-                      </li>
-                    </ul>
-                    {/* <div className="social_links">
+                        </li>
+                      </ul>
+                      {/* <div className="social_links">
                 <a href={candidateData?.facebook ?? '#'} target="_blank" rel="noreferrer">
                   <i className="fab fa-facebook"></i>
                 </a>
@@ -285,26 +284,27 @@ const index = ({ single_business = {} }) => {
                   <i className="fab fa-twitter"></i>
                 </a>
               </div> */}
-                  </div>
-                </Grid>
+                    </div>
+                  </Grid>
 
-                <Grid item className="col-md-7">
-                  {/* <CandidateTabs /> */}
-                  <Box
-                    sx={{
-                      backgroundColor: "#F9F9FB",
-                      marginTop: "12px",
-                      padding: "20px",
-                    }}
-                  >
-                    <About data={single_business?.description} />
-                  </Box>
+                  <Grid item className="col-md-7">
+                    {/* <CandidateTabs /> */}
+                    <Box
+                      sx={{
+                        backgroundColor: "#F9F9FB",
+                        marginTop: "12px",
+                        padding: "20px",
+                      }}
+                    >
+                      <About data={single_business?.description} />
+                    </Box>
+                  </Grid>
                 </Grid>
-              </Grid>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Head>
     </>
   );
 };
