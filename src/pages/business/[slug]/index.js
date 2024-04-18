@@ -52,23 +52,26 @@ const index = ({ single_business = {} }) => {
   return (
     <>
       <Head>
-        <meta name="og:description" content={single_business?.excerpt} />
-        <meta property="og:image" content={single_business?.feature_image} />
-        <meta property="og:title" content={single_business?.title} />
+        <meta name="og:description" content={single_business?.description} />
+        <meta property="og:image" content={single_business?.banner_image} />
+        <meta property="og:title" content={single_business?.fullname} />
 
         <meta
           property="og:url"
           content={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
         />
         <meta property="og:type" content="article" />
-        <title>{single_business?.title}</title>
-        <meta name="description" content={single_business?.excerpt} />
+        <title>{single_business?.fullname}</title>
+        <meta name="description" content={single_business?.description} />
 
-        <meta property="author" content={single_business?.author} />
+        <meta property="author" content={single_business?.email} />
         <meta name="twitter:card" content={"summary_large_image"} />
-        <meta name="twitter:title" content={single_business?.title} />
-        <meta name="twitter:description" content={single_business?.excerpt} />
-        <meta name="twitter:image" content={single_business?.feature_image} />
+        <meta name="twitter:title" content={single_business?.fullname} />
+        <meta
+          name="twitter:description"
+          content={single_business?.description}
+        />
+        <meta name="twitter:image" content={single_business?.banner_image} />
         <meta
           name="twitter:url"
           content={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
@@ -116,42 +119,42 @@ const index = ({ single_business = {} }) => {
                     </div>
                     <div className="candidate_designation">
                       {filteredSingleBusiness?.category1?.title}
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          marginTop: "20px",
+                        }}
+                      >
+                        <Box sx={{ color: "gray", fontSize: "12px" }} mb={1}>
+                          Share Profile
+                        </Box>
+                        <Box sx={{ display: "flex", gap: "15px" }}>
+                          <FacebookShareButton
+                            appId="393640856408187"
+                            url={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
+                          >
+                            <Facebook
+                              sx={{ color: "#0866FF", fontSize: "20px" }}
+                            />
+                          </FacebookShareButton>
+                          <TwitterShareButton
+                            url={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
+                          >
+                            <Twitter
+                              sx={{ color: "#1BC4F7", fontSize: "20px" }}
+                            />
+                          </TwitterShareButton>
+                          <WhatsappShareButton
+                            url={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
+                          >
+                            <WhatsApp
+                              sx={{ color: "#24CC63", fontSize: "20px" }}
+                            />
+                          </WhatsappShareButton>
+                        </Box>
+                      </Box>
                     </div>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        marginTop: "20px",
-                      }}
-                    >
-                      <Box sx={{ color: "gray", fontSize: "12px" }}>
-                        Share Profile
-                      </Box>
-                      <Box sx={{ display: "flex", gap: "15px" }}>
-                        <FacebookShareButton
-                          appId="393640856408187"
-                          url={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
-                        >
-                          <Facebook
-                            sx={{ color: "#0866FF", fontSize: "20px" }}
-                          />
-                        </FacebookShareButton>
-                        <TwitterShareButton
-                          url={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
-                        >
-                          <Twitter
-                            sx={{ color: "#1BC4F7", fontSize: "20px" }}
-                          />
-                        </TwitterShareButton>
-                        <WhatsappShareButton
-                          url={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
-                        >
-                          <WhatsApp
-                            sx={{ color: "#24CC63", fontSize: "20px" }}
-                          />
-                        </WhatsappShareButton>
-                      </Box>
-                    </Box>
                   </div>
                 </div>
               </div>
@@ -325,15 +328,11 @@ export async function getStaticPaths() {
   const res = await fetch(`${LIVE_BASE_URL}/api/businesses`)
     .then((response) => response.json())
     .then((json) => json);
-  console.log("🚀 ~ getStaticPaths ~ res:", res);
-
   const paths = res?.data?.map((item) => ({
     params: {
       slug: item?.slug,
     },
   }));
-  console.log("🚀 ~ paths ~ paths:", paths);
-
   return {
     paths,
     fallback: true,
