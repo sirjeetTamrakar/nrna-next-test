@@ -3,14 +3,12 @@ import insta from "@/assets/images/insta.png";
 import linkedin from "@/assets/images/linkedin.png";
 import About from "@/components/locals/Business/About";
 import { LIVE_BASE_URL } from "@/helpers";
-import useScreenSize from "@/hooks/useScreenSize";
 import { getBusiness, getBusinessCategory } from "@/redux/homepage/actions";
 import { Facebook, Twitter, WhatsApp } from "@mui/icons-material";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import { Box, Grid } from "@mui/material";
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -21,14 +19,6 @@ import {
 const index = ({ single_business = {} }) => {
   console.log("🚀 ~ index ~ single_business:", single_business);
   const dispatch = useDispatch();
-  const pathname = window.location.pathname;
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  const router = useRouter();
-  const { slug } = router?.query;
-  const screenSize = useScreenSize();
-
   const [filteredSingleBusiness, setFilteredSingleBusiness] = useState();
   const { business_category } = useSelector((state) => state.homepage);
   useEffect(() => {
@@ -95,24 +85,12 @@ const index = ({ single_business = {} }) => {
         <div className="container">
           <div className="candidate_page">
             <div className="candidate_page_lower_banner">
-              <div
-                className={`${
-                  screenSize?.width < 993
-                    ? "business_page_lower_banner_wrapper"
-                    : "candidate_page_lower_banner_wrapper"
-                }`}
-              >
+              <div className={`${"candidate_page_lower_banner_wrapper"}`}>
                 <div className="candidate_page_lower_banner_wrapper_box">
                   <div className="img_container">
                     <img src={single_business?.image} alt="" />
                   </div>
-                  <div
-                    className={`${
-                      screenSize?.width < 993
-                        ? "business_name_box"
-                        : "candidate_name_box"
-                    }`}
-                  >
+                  <div className={`${"candidate_name_box"}`}>
                     <div className="candidate_name">
                       {single_business?.fullname}
                     </div>
@@ -158,13 +136,7 @@ const index = ({ single_business = {} }) => {
                 </div>
               </div>
               <div className="candidate_social">
-                <div
-                  className={`${
-                    screenSize?.width < 993
-                      ? "business_social_wrapper_box"
-                      : "candidate_social_wrapper_box"
-                  }`}
-                >
+                <div className={`${"candidate_social_wrapper_box"}`}>
                   <div className="candidate_social_wrapper">
                     <a
                       href={single_business?.facebook_url}
