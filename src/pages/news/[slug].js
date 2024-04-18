@@ -224,6 +224,7 @@ export async function getStaticPaths() {
       slug: item?.slug,
     },
   }));
+  console.log("🚀 ~ paths ~ paths:", paths);
 
   return {
     paths,

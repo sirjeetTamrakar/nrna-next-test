@@ -4,6 +4,7 @@ import linkedin from "@/assets/images/linkedin.png";
 import About from "@/components/locals/Business/About";
 import { LIVE_BASE_URL } from "@/helpers";
 import useScreenSize from "@/hooks/useScreenSize";
+import { getBusiness, getBusinessCategory } from "@/redux/homepage/actions";
 import { Facebook, Twitter, WhatsApp } from "@mui/icons-material";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import { Box, Grid } from "@mui/material";
@@ -45,9 +46,10 @@ const index = ({ single_business = {} }) => {
   // useEffect(() => {
   //   slug && dispatch(getSingleBusiness(slug));
   // }, [slug]);
-  // useEffect(() => {
-  //   dispatch(getBusinessCategory());
-  // }, []);
+  useEffect(() => {
+    dispatch(getBusinessCategory());
+    dispatch(getBusiness());
+  }, []);
 
   return (
     <>
