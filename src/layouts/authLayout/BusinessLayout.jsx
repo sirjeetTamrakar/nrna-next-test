@@ -1,5 +1,4 @@
 import SecondaryNav from "@/components/globals/SecondaryNav";
-import { getSingleBusiness } from "@/redux/homepage/actions";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,9 +22,9 @@ const SecondaryNavWrapper = () => {
     navigate.push(data);
   };
   const { single_business } = useSelector((state) => state.homepage);
-  useEffect(() => {
-    slug && dispatch(getSingleBusiness(slug));
-  }, [slug]);
+  // useEffect(() => {
+  //   slug && dispatch(getSingleBusiness(slug));
+  // }, [slug]);
   useEffect(() => {
     pathname &&
       setSelected(options?.find((list) => list?.path == pathname)?.value);

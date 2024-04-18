@@ -55,10 +55,7 @@ const index = ({ single_business = {} }) => {
     <>
       <Head>
         <meta name="og:description" content={single_business?.email} />
-        <meta
-          property="og:image"
-          content={"https://nbns-api.nbnsglobal.com/get-media/528"}
-        />
+        <meta property="og:image" content={single_business?.image} />
         <meta property="og:title" content={single_business?.fullname} />
 
         <meta
@@ -73,10 +70,7 @@ const index = ({ single_business = {} }) => {
         <meta name="twitter:card" content={"summary_large_image"} />
         <meta name="twitter:title" content={single_business?.fullname} />
         <meta name="twitter:description" content={single_business?.email} />
-        <meta
-          name="twitter:image"
-          content={"https://nbns-api.nbnsglobal.com/get-media/528"}
-        />
+        <meta name="twitter:image" content={single_business?.image} />
         <meta
           name="twitter:url"
           content={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
