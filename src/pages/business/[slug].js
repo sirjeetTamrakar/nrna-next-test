@@ -16,7 +16,7 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from "react-share";
-const index = ({ single_business = {} }) => {
+const SingleBusiness = ({ single_business = {} }) => {
   const screenSize = useScreenSize();
 
   console.log("🚀 ~ index ~ single_business:", single_business);
@@ -71,7 +71,7 @@ const index = ({ single_business = {} }) => {
         />
       </Head>
       <div className="main_content">
-        {/* <div
+        <div
           className="candidate_page_banner"
           style={{
             // backgroundImage: `url('${candidateImages?.profileBannerImage}')`,
@@ -79,7 +79,7 @@ const index = ({ single_business = {} }) => {
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
-        ></div> */}
+        ></div>
         <div className="container">
           <div className="candidate_page">
             <div className="candidate_page_lower_banner">
@@ -298,7 +298,7 @@ const index = ({ single_business = {} }) => {
   );
 };
 
-export default index;
+export default SingleBusiness;
 
 export async function getStaticProps({ params }) {
   const res = await fetch(
