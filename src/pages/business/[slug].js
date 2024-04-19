@@ -96,11 +96,9 @@ const index = ({ single_business = {} }) => {
                     ? "business_page_lower_banner_wrapper"
                     : "candidate_page_lower_banner_wrapper"
                 }`}
+                style={{ marginLeft: "10px" }}
               >
-                <div
-                  className="candidate_page_lower_banner_wrapper_box"
-                  style={{ marginLeft: "10px" }}
-                >
+                <div className="candidate_page_lower_banner_wrapper_box">
                   <div className="img_container" style={{ margin: 0 }}>
                     <img src={single_business?.image} alt="" />
                   </div>
