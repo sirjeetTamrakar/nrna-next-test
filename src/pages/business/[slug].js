@@ -108,7 +108,7 @@ const index = ({ single_business = {} }) => {
                         ? "business_name_box"
                         : "candidate_name_box"
                     }`}
-                    style={{ marginLeft: "20px", zIndex: 1000 }}
+                    style={{ marginLeft: "20px", zIndex: 10 }}
                   >
                     <div className="candidate_name">
                       {single_business?.fullname}
