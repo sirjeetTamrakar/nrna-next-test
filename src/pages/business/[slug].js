@@ -71,7 +71,7 @@ const index = ({ single_business = {} }) => {
         />
       </Head>
       <div className="main_content">
-        <div
+        {/* <div
           className="candidate_page_banner"
           style={{
             // backgroundImage: `url('${candidateImages?.profileBannerImage}')`,
@@ -79,13 +79,7 @@ const index = ({ single_business = {} }) => {
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
-        ></div>
-        {/* <BannerBusinessSection
-        banners={single_business?.banner_image}
-        data={single_business}
-        singleBanner
-      /> */}
-
+        ></div> */}
         <div className="container">
           <div className="candidate_page">
             <div className="candidate_page_lower_banner">
