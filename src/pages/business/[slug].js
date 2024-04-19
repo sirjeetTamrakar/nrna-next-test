@@ -46,10 +46,7 @@ const SingleBusiness = ({ single_business = {} }) => {
   return (
     <>
       <Head>
-        <meta
-          name="og:description"
-          content={{ __html: single_business?.description }}
-        />
+        <meta name="og:description" content={single_business?.description} />
         <meta property="og:image" content={single_business?.image} />
         <meta property="og:title" content={single_business?.fullname} />
 
@@ -59,10 +56,7 @@ const SingleBusiness = ({ single_business = {} }) => {
         />
         <meta property="og:type" content="article" />
         <title>{single_business?.fullname}</title>
-        <meta
-          name="description"
-          content={{ __html: single_business?.description }}
-        />
+        <meta name="description" content={single_business?.description} />
 
         {/* Remove author if it's not necessary */}
         {/* <meta property="author" content={single_business?.author || 'Author Name'} /> */}
@@ -71,7 +65,7 @@ const SingleBusiness = ({ single_business = {} }) => {
         <meta name="twitter:title" content={single_business?.fullname} />
         <meta
           name="twitter:description"
-          content={{ __html: single_business?.description }}
+          content={single_business?.description}
         />
         <meta name="twitter:image" content={single_business?.image} />
         <meta
