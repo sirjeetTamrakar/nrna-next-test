@@ -18,8 +18,6 @@ import {
 } from "react-share";
 const SingleBusiness = ({ single_business = {} }) => {
   const screenSize = useScreenSize();
-
-  console.log("🚀 ~ index ~ single_business:", single_business);
   const dispatch = useDispatch();
   const [filteredSingleBusiness, setFilteredSingleBusiness] = useState();
   const { business_category, single_business_loading } = useSelector(
@@ -79,7 +77,7 @@ const SingleBusiness = ({ single_business = {} }) => {
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
-        ></div>
+        />
         <div className="container">
           <div className="candidate_page">
             <div className="candidate_page_lower_banner">
