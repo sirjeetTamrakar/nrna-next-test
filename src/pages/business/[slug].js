@@ -118,7 +118,10 @@ const SingleBusiness = ({ single_business = {} }) => {
               >
                 <div className="candidate_page_lower_banner_wrapper_box">
                   <div className="img_container" style={{ margin: 0 }}>
-                    <img src={single_business?.image} alt="" />
+                    <img
+                      src={single_business?.image}
+                      alt={single_business?.fullname}
+                    />
                   </div>
                   <div
                     className={`${
@@ -189,7 +192,7 @@ const SingleBusiness = ({ single_business = {} }) => {
                       <div className="candidate_social_icons_box">
                         <Image
                           src={facebook}
-                          alt=""
+                          alt={single_business?.facebook_url}
                           className="candidate_social_icons"
                         />
                       </div>
@@ -202,7 +205,7 @@ const SingleBusiness = ({ single_business = {} }) => {
                       >
                         <Image
                           src={insta}
-                          alt=""
+                          alt={single_business?.instagram_url}
                           className="candidate_social_icons"
                         />
                       </a>
@@ -215,7 +218,7 @@ const SingleBusiness = ({ single_business = {} }) => {
                       >
                         <Image
                           src={linkedin}
-                          alt=""
+                          alt={single_business?.twitter_url}
                           className="candidate_social_icons"
                         />
                       </a>
