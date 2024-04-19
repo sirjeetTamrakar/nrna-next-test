@@ -71,8 +71,6 @@ const Layouts = ({ Component, pageProps }) => {
     DynamicLayout = NCCLayout;
   } else if (router.pathname.startsWith("/business/")) {
     DynamicLayout = BusinessLayout;
-  } else if (router.pathname.startsWith("/business/")) {
-    DynamicLayout = BusinessLayout;
   } else if (router.pathname.startsWith("/[candidate]")) {
     DynamicLayout = CandidateLayout;
   } else {

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 const BusinessLayout = ({ children }) => {
   return (
     <>
-      <SecondaryNavWrapper />
+      {/* <SecondaryNavWrapper /> */}
       {children}
     </>
   );
