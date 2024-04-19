@@ -46,26 +46,53 @@ const SingleBusiness = ({ single_business = {} }) => {
   return (
     <>
       <Head>
-        <meta name="og:description" content={single_business?.email} />
-        <meta property="og:image" content={single_business?.image} />
-        <meta property="og:title" content={single_business?.fullname} />
+        <meta
+          name="og:description"
+          content={single_business?.description || "Description not available"}
+        />
+        <meta
+          property="og:image"
+          content={single_business?.image || "default_image_url"}
+        />
+        <meta
+          property="og:title"
+          content={single_business?.fullname || "Business Name"}
+        />
 
         <meta
           property="og:url"
-          content={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
+          content={`https://nrna-next-test.vercel.app/business/${
+            single_business?.slug || "default_slug"
+          }`}
         />
         <meta property="og:type" content="article" />
-        <title>{single_business?.fullname}</title>
-        <meta name="description" content={single_business?.email} />
+        <title>{single_business?.fullname || "Business Name"}</title>
+        <meta
+          name="description"
+          content={single_business?.description || "Description not available"}
+        />
 
-        <meta property="author" content={single_business?.author} />
+        {/* Remove author if it's not necessary */}
+        {/* <meta property="author" content={single_business?.author || 'Author Name'} /> */}
+
         <meta name="twitter:card" content={"summary_large_image"} />
-        <meta name="twitter:title" content={single_business?.fullname} />
-        <meta name="twitter:description" content={single_business?.email} />
-        <meta name="twitter:image" content={single_business?.image} />
+        <meta
+          name="twitter:title"
+          content={single_business?.fullname || "Business Name"}
+        />
+        <meta
+          name="twitter:description"
+          content={single_business?.description || "Description not available"}
+        />
+        <meta
+          name="twitter:image"
+          content={single_business?.image || "default_image_url"}
+        />
         <meta
           name="twitter:url"
-          content={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
+          content={`https://nrna-next-test.vercel.app/business/${
+            single_business?.slug || "default_slug"
+          }`}
         />
       </Head>
       <div className="main_content">
