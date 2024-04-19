@@ -2,7 +2,6 @@ import facebook from "@/assets/images/facebook.png";
 import insta from "@/assets/images/insta.png";
 import linkedin from "@/assets/images/linkedin.png";
 import About from "@/components/locals/Business/About";
-import { LIVE_BASE_URL } from "@/helpers";
 import useScreenSize from "@/hooks/useScreenSize";
 import { getBusiness, getBusinessCategory } from "@/redux/homepage/actions";
 import { Facebook, Twitter, WhatsApp } from "@mui/icons-material";
@@ -308,7 +307,9 @@ const index = ({ single_business = {} }) => {
 export default index;
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`${LIVE_BASE_URL}/api/businesses/${params?.slug}`)
+  const res = await fetch(
+    `https://nbns-api.nbnsglobal.com/api/businesses/${params?.slug}`
+  )
     .then((response) => response.json())
     .then((json) => json);
   return {
@@ -321,7 +322,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(`${LIVE_BASE_URL}/api/businesses`)
+  const res = await fetch(`https://nbns-api.nbnsglobal.com/api/businesses`)
     .then((response) => response.json())
     .then((json) => json);
   const paths = res?.data?.map((item) => ({
