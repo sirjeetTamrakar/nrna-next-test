@@ -25,7 +25,8 @@ export default function App({ Component, pageProps }) {
   const [isClient, setIsClient] = useState(
     ((router.pathname.includes("/news/") ||
       router.pathname.includes("/business/")) &&
-      !router.pathname.includes("/dashboard")) ||
+      !router.pathname.includes("/dashboard") &&
+      !router.pathname.includes("/nrna/")) ||
       false
   );
   // router.pathname.includes("/news/") ||
