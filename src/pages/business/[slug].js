@@ -48,22 +48,22 @@ const SingleBusiness = ({ single_business = {} }) => {
   return (
     <>
       <Head>
-        <meta name="og:description" content={single_business?.email} />
+        <meta name="og:description" content={"DEEEEEEES"} />
         <meta property="og:image" content={single_business?.image} />
-        <meta property="og:title" content={single_business?.fullname} />
+        <meta property="og:title" content={"BAKUGAN"} />
 
         <meta
           property="og:url"
           content={`https://nrna-next-test.vercel.app/business/${single_business?.slug}`}
         />
         <meta property="og:type" content="article" />
-        <title>{single_business?.fullname}</title>
-        <meta name="description" content={single_business?.email} />
+        <title>{"BAKUGAN"}</title>
+        <meta name="description" content={"DEEEEEEES"} />
 
-        <meta property="author" content={single_business?.author} />
+        <meta property="author" content={"RAM"} />
         <meta name="twitter:card" content={"summary_large_image"} />
-        <meta name="twitter:title" content={single_business?.fullname} />
-        <meta name="twitter:description" content={single_business?.email} />
+        <meta name="twitter:title" content={"BAKUGAN"} />
+        <meta name="twitter:description" content={"DEEEEEEES"} />
         <meta name="twitter:image" content={single_business?.image} />
         <meta
           name="twitter:url"
@@ -103,9 +103,7 @@ const SingleBusiness = ({ single_business = {} }) => {
                     }`}
                     style={{ marginLeft: "20px", zIndex: 10 }}
                   >
-                    <div className="candidate_name">
-                      {single_business?.fullname}
-                    </div>
+                    <div className="candidate_name">{"BAKUGAN"}</div>
                     <div className="candidate_designation">
                       {filteredSingleBusiness?.category1?.title}
                       <Box
@@ -219,7 +217,7 @@ const SingleBusiness = ({ single_business = {} }) => {
                           Email Address
                         </div>
                         <span className="contact_list_item">
-                          {single_business?.email ?? ""}
+                          {"DEEEEEEES" ?? ""}
                         </span>
                       </li>
                       <li>
