@@ -23,7 +23,8 @@ import "../styles/main.scss";
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const [isClient, setIsClient] = useState(
-    (router.pathname.includes("/news/") &&
+    ((router.pathname.includes("/news/") ||
+      router.pathname.includes("/business/")) &&
       !router.pathname.includes("/dashboard")) ||
       false
   );
